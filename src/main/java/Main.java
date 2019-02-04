@@ -1,5 +1,6 @@
 public class Main {
-    public static void main(String[] args){
-
+    public static void main(String[] args) {
+        Map map = new Map();
+        map.show();
     }
 }
