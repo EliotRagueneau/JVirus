@@ -1,4 +1,4 @@
-public class Virus extends Content {
+public class Virus extends Movable {
     public Virus(int x, int y) {
         super(x, y);
     }
