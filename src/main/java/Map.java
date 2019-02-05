@@ -3,14 +3,20 @@ import Utils.IO;
 import java.util.Random;
 
 public class Map {
-    public static final int MAP_SIZE = 20;
-    public static final int NB_CASE = MAP_SIZE * MAP_SIZE;
+    public int MAP_SIZE;
+    public int NB_CASE;
 
-    private static Content[] map = new Content[NB_CASE];
+    private Content[] map;
 
-    public Map() {
+    public Map(int MAP_SIZE) {
+        this.MAP_SIZE = MAP_SIZE;
+        NB_CASE = MAP_SIZE * MAP_SIZE;
+        map = new Content[NB_CASE];
+
+
         for (int x = 0; x < NB_CASE; x++) {
-            map[x] = new Empty(x / MAP_SIZE, x % MAP_SIZE);
+            map[x] = new Content(x / MAP_SIZE, x % MAP_SIZE) {
+            };
 
         }
         Random rand = new Random();
@@ -20,7 +26,7 @@ public class Map {
 
             int x = rand.nextInt(NB_CASE);
 
-            if (map[x] instanceof Empty) {
+            if (map[x].isEmpty()) {
                 if (n < 33) {
                     map[x] = new XCell(x / MAP_SIZE, x % MAP_SIZE);
                 } else if (n < 66) {
@@ -28,7 +34,7 @@ public class Map {
                 } else if (n < 100) {
                     map[x] = new ZCell(x / MAP_SIZE, x % MAP_SIZE);
                 } else {
-                    map[x] = new Virus(x / MAP_SIZE, x % MAP_SIZE);
+                    map[x] = new VirusA(x / MAP_SIZE, x % MAP_SIZE);
                 }
 
             } else {
@@ -80,7 +86,7 @@ public class Map {
         System.out.print(headline);
     }
 
-    private Content selectContent(int x, int y) {
+    public Content selectContent(int x, int y) {
         return map[y * MAP_SIZE + x];
     }
 
@@ -107,5 +113,10 @@ public class Map {
             IO.print("Mauvais entrée");
             return selectContent();
         }
+    }
+
+    public void exchangePosition(Content a, Content b){
+        map[a.getX() + a.getY()*MAP_SIZE] = b;
+        map[b.getX() + b.getY()*MAP_SIZE] = a;
     }
 }

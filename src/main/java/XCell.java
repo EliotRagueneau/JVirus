@@ -1,4 +1,4 @@
-public class XCell extends Cellule {
+public class XCell extends Cell {
     public XCell(int x, int y) {
         super(x, y, 2);
     }

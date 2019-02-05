@@ -9,8 +9,8 @@
         <module name="JVirus" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="JVirus" target="1.5" />
+    <bytecodeTargetLevel target="11">
+      <module name="JVirus" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

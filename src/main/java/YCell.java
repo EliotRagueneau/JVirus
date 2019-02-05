@@ -1,4 +1,4 @@
-public class YCell extends Cellule {
+public class YCell extends Cell {
     public YCell(int x, int y) {
         super(x, y, 1);
     }

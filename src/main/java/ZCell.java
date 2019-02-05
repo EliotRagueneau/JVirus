@@ -1,4 +1,4 @@
-public class ZCell extends Cellule {
+public class ZCell extends Cell {
 
     public ZCell(int x, int y) {
         super(x, y, 0);
