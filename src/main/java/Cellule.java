@@ -1,6 +1,8 @@
 public abstract class Cellule extends Movable {
+    protected int immunityLevel;
 
-    protected Cellule(int x, int y) {
+    public Cellule(int x, int y, int immunityLevel) {
         super(x, y);
+        this.immunityLevel = immunityLevel;
     }
 }

@@ -1,7 +1,7 @@
 public abstract class Content {
-    private int y;
+    protected int y;
 
-    private int x;
+    protected int x;
 
     protected Content(int x, int y) {
         this.y = y;

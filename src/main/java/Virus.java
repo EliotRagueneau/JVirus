@@ -6,6 +6,5 @@ public class Virus extends Movable {
     @Override
     protected void show() {
         System.out.print(" 0 ");
-        super.show();
     }
 }

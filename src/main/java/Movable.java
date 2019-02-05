@@ -1,4 +1,4 @@
-public class Movable extends Content {
+public abstract class Movable extends Content {
     protected Movable(int x, int y) {
         super(x, y);
     }
