@@ -1,5 +1,7 @@
 import Utils.IO;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Map {
@@ -11,34 +13,40 @@ public class Map {
         this.MAP_SIZE = MAP_SIZE;
         map = new Content[MAP_SIZE][MAP_SIZE];
 
+        List<int[]> empties = new ArrayList<>();
 
         for (int x = 0; x < MAP_SIZE; x++) {
-            for (int y = 0; y < MAP_SIZE ; y++) {
-                map[y][x] = new Content(x, y) {};
+            for (int y = 0; y < MAP_SIZE; y++) {
+                map[y][x] = new Content(x, y);
+                empties.add(new int[]{x, y});
             }
         }
-        Random rand = new Random();
 
+        Random rand = new Random();
 
         for (int n = 0; n < 110; n++) {
 
-            int x = rand.nextInt(MAP_SIZE);
-            int y = rand.nextInt(MAP_SIZE);
+            int[] coords = empties.remove(rand.nextInt(empties.size()));
+            int x = coords[0];
+            int y = coords[1];
 
-            if (map[y][x].isEmpty()) {
-                if (n < 33) {
-                    map[y][x] = new XCell(x,y);
-                } else if (n < 66) {
-                    map[y][x] = new YCell(x,y);
-                } else if (n < 100) {
-                    map[y][x] = new ZCell(x,y);
-                } else {
-                    map[y][x] = new VirusA(x,y);
-                }
-
+            if (n < 33) {
+                map[y][x] = new XCell(x, y);
+            } else if (n < 66) {
+                map[y][x] = new YCell(x, y);
+            } else if (n < 100) {
+                map[y][x] = new ZCell(x, y);
             } else {
-                n--;
+                map[y][x] = new VirusA(x, y);
             }
+            show();
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
         }
 
         show();
@@ -114,7 +122,7 @@ public class Map {
         }
     }
 
-    public void exchangePosition(Content a, Content b){
+    public void exchangePosition(Content a, Content b) {
         map[a.getY()][a.getX()] = b;
         map[b.getY()][b.getX()] = a;
     }
