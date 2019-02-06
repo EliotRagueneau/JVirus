@@ -1,8 +1,7 @@
 public abstract class Cell extends Content {
     protected int immunityLevel;
 
-    public Cell(int x, int y, int immunityLevel) {
-        super(x, y);
+    public Cell(int immunityLevel) {
         empty = false;
         this.immunityLevel = immunityLevel;
     }
