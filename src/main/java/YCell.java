@@ -7,4 +7,9 @@ public class YCell extends Cell {
     protected void show() {
         System.out.print(" Y ");
     }
+
+    @Override
+    public Cell fuse(Virus virus) {
+        return null;
+    }
 }

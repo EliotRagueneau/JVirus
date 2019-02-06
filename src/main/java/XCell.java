@@ -1,6 +1,6 @@
 public class XCell extends Cell {
-    public XCell() {
-        super(2);
+    public XCell(int x, int y) {
+        super(x, y, 2);
     }
 
     @Override

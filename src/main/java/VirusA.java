@@ -1,4 +1,5 @@
 public class VirusA extends Virus {
-    protected VirusA() {
+    protected VirusA(int x, int y) {
+        super(x, y);
     }
 }

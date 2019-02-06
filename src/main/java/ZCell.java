@@ -8,4 +8,9 @@ public class ZCell extends Cell {
     protected void show() {
         System.out.print(" Z ");
     }
+
+    @Override
+    public Cell fuse(Virus virus) {
+        return null;
+    }
 }

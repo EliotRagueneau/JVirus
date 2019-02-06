@@ -4,37 +4,36 @@ import java.util.Random;
 
 public class Map {
     public int MAP_SIZE;
-    public int NB_CASE;
 
-    private Content[] map;
+    private Content[][] map;
 
     public Map(int MAP_SIZE) {
         this.MAP_SIZE = MAP_SIZE;
-        NB_CASE = MAP_SIZE * MAP_SIZE;
-        map = new Content[NB_CASE];
+        map = new Content[MAP_SIZE][MAP_SIZE];
 
 
-        for (int x = 0; x < NB_CASE; x++) {
-            map[x] = new Content(x / MAP_SIZE, x % MAP_SIZE) {
-            };
-
+        for (int x = 0; x < MAP_SIZE; x++) {
+            for (int y = 0; y < MAP_SIZE ; y++) {
+                map[y][x] = new Content(x, y) {};
+            }
         }
         Random rand = new Random();
 
 
         for (int n = 0; n < 110; n++) {
 
-            int x = rand.nextInt(NB_CASE);
+            int x = rand.nextInt(MAP_SIZE);
+            int y = rand.nextInt(MAP_SIZE);
 
-            if (map[x].isEmpty()) {
+            if (map[y][x].isEmpty()) {
                 if (n < 33) {
-                    map[x] = new XCell(x / MAP_SIZE, x % MAP_SIZE);
+                    map[y][x] = new XCell(x,y);
                 } else if (n < 66) {
-                    map[x] = new YCell(x / MAP_SIZE, x % MAP_SIZE);
+                    map[y][x] = new YCell(x,y);
                 } else if (n < 100) {
-                    map[x] = new ZCell(x / MAP_SIZE, x % MAP_SIZE);
+                    map[y][x] = new ZCell(x,y);
                 } else {
-                    map[x] = new VirusA(x / MAP_SIZE, x % MAP_SIZE);
+                    map[y][x] = new VirusA(x,y);
                 }
 
             } else {
@@ -87,7 +86,7 @@ public class Map {
     }
 
     public Content selectContent(int x, int y) {
-        return map[y * MAP_SIZE + x];
+        return map[y][x];
     }
 
     public Content selectContent() {
@@ -116,7 +115,7 @@ public class Map {
     }
 
     public void exchangePosition(Content a, Content b){
-        map[a.getX() + a.getY()*MAP_SIZE] = b;
-        map[b.getX() + b.getY()*MAP_SIZE] = a;
+        map[a.getY()][a.getX()] = b;
+        map[b.getY()][b.getX()] = a;
     }
 }
