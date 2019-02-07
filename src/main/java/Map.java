@@ -115,9 +115,7 @@ public class Map {
     }
 
     public Content selectContent() {
-
-
-        String input = IO.input("Quelle case voulez vous choisir ? (A 1)\n");
+        String input = IO.input("Quelle case voulez vous choisir ? (Ex : A 1)\n");
         if (input.matches(String.format("[a-%cA-%c][ \\-]?\\d{1,2}", (char) ('a' + MAP_SIZE), (char) ('A' + MAP_SIZE)))) {
             String[] arr = input.split("[ -]");
             char col = arr[0].toUpperCase().charAt(0);
@@ -134,7 +132,7 @@ public class Map {
             }
             return selectContent(x, y);
         } else {
-            IO.print("Mauvais entrée");
+            IO.print("Mauvaise entrée");
             return selectContent();
         }
     }

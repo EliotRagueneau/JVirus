@@ -1,3 +1,5 @@
+import Utils.IO;
+
 import java.lang.reflect.InvocationTargetException;
 
 public abstract class SensibleCell extends Cell {
@@ -11,6 +13,30 @@ public abstract class SensibleCell extends Cell {
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    @Override
+    public void menu() {
+        super.menu();
+        IO.print("Que voulez-vous faire avec cette cellule immunisée ?\n");
+        IO.print("8 : Vous déplacer vers le haut\n");
+        IO.print("2 : Vous déplacer vers le bas\n");
+        IO.print("4 : Vous déplacer vers la gauche\n");
+        IO.print("6 : Vous déplacer vers la droite\n");
+//        IO.print("0 : Commettre l'irréparable... l'apoptose !\n");
+        int rep = IO.intInput();
+        switch (rep){
+            case 8:
+                move(Direction.UP);
+            case 2:
+                move(Direction.DOWN);
+            case 4:
+                move(Direction.LEFT);
+            case 6:
+                move(Direction.RIGHT);
+//            case 0:
+//                apoptose();
         }
     }
 }

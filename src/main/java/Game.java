@@ -6,6 +6,14 @@ public class Game {
         map.show();
     }
 
+    public static void menu(){
+        boolean go = true;
+        while(go){
+            Content selectedCell = map.selectContent();
+            selectedCell.menu();
+        }
+    }
+
     public static Map getMap() {
         return map;
     }

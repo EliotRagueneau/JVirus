@@ -1,3 +1,5 @@
+import Utils.IO;
+
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -74,5 +76,8 @@ public class Content {
 
     public Cell fuse(Virus virus) {
         return null;
+    }
+
+    public void menu() {
     }
 }
