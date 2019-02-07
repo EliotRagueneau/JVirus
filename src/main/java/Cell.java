@@ -7,13 +7,13 @@ public abstract class Cell extends Content {
         this.immunityLevel = immunityLevel;
     }
 
-    public Cell fuse(Cell cell){
-        if (immunityLevel < cell.immunityLevel){
+    public Cell fuse(Cell cell) {
+        if (immunityLevel < cell.immunityLevel) {
             return this;
         } else {
             return cell;
         }
     }
 
-    public abstract Cell fuse(Virus virus);
+    abstract Cell fuse(Virus virus);
 }

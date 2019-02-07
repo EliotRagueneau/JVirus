@@ -5,9 +5,9 @@ public class Content {
 
     protected boolean empty = true;
 
-    public boolean isEmpty() {
-        return empty;
-    }
+//    public boolean isEmpty() {
+//        return empty;
+//    }
 
     protected Content(int x, int y) {
         this.y = y;
@@ -18,21 +18,21 @@ public class Content {
         System.out.print(" · ");
     }
 
-    protected void move(Direction dir) {
+   /* protected void move(Direction dir) {
         switch (dir) {
             case UP:
                 if (y > 0) {
                     y--;
                     Map map = Game.getMap();
                     Content target = map.selectContent(x, y);
-                    if (!target.isEmpty()){
-                        fuse(target);
+                    if (!target.isEmpty()) {
+                        this.fuse(target);
                     } else {
                         map.exchangePosition(this, target);
                     }
                 }
         }
-    }
+    }*/
 
     public int getY() {
         return y;
@@ -42,5 +42,6 @@ public class Content {
         return x;
     }
 
-    protected void fuse(Content target){}
+//    protected void fuse(Content target) {
+//    }
 }

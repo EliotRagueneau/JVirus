@@ -1,6 +1,7 @@
-public class YCell extends Cell {
+public class YCell extends SensibleCell {
+
     public YCell(int x, int y) {
-        super(x, y, 1);
+        super(x, y, 3);
     }
 
     @Override
@@ -8,8 +9,4 @@ public class YCell extends Cell {
         System.out.print(" Y ");
     }
 
-    @Override
-    public Cell fuse(Virus virus) {
-        return null;
-    }
 }

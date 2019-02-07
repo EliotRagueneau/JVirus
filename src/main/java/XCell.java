@@ -1,15 +1,10 @@
-public class XCell extends Cell {
+public class XCell extends ImmunizedCell {
     public XCell(int x, int y) {
-        super(x, y, 2);
+        super(x, y);
     }
 
     @Override
     protected void show() {
         System.out.print(" X ");
-    }
-
-    @Override
-    public Cell fuse(Virus virus) {
-        return null;
     }
 }

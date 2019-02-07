@@ -41,7 +41,7 @@ public class Map {
             }
             show();
             try {
-                Thread.sleep(50);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -95,6 +95,10 @@ public class Map {
 
     public Content selectContent(int x, int y) {
         return map[y][x];
+    }
+
+    public void replaceContent(int x, int y, Content replace){
+        map[y][x] = replace;
     }
 
     public Content selectContent() {
