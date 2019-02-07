@@ -110,6 +110,7 @@ public class Map {
         return map[y][x];
     }
 
+
     public void replaceContent(int x, int y, Content replace){
         map[y][x] = replace;
     }
@@ -131,6 +132,64 @@ public class Map {
                 }
             }
             return selectContent(x, y);
+        } else {
+            IO.print("Mauvaise entrée");
+            return selectContent();
+        }
+    }
+
+    public Content selectCell(){ //Même fonction qu'au dessus mais juste avec les cellules uniquement
+        String input = IO.input("Quelle case voulez vous choisir ? (Ex : A 1)\n");
+        if (input.matches(String.format("[a-%cA-%c][ \\-]?\\d{1,2}", (char) ('a' + MAP_SIZE), (char) ('A' + MAP_SIZE)))) {
+            String[] arr = input.split("[ -]");
+            char col = arr[0].toUpperCase().charAt(0);
+            int x = col - 'A';
+            int y;
+            if (arr.length == 2) {
+                y = Integer.valueOf(arr[1]) - 1;
+            } else {
+                y = Integer.valueOf(arr[0].substring(1)) - 1;
+                if (y > MAP_SIZE) {
+                    IO.print("Ligne trop élevée ( doit être compris entre 1 et " + MAP_SIZE);
+                    return selectContent();
+                }
+            }
+            Content content = selectContent(x, y);
+            if (content instanceof Cell){
+                return content;
+            } else {
+                IO.print("Sélectionnez une cellule, pas un virus !");
+                return selectContent();
+            }
+        } else {
+            IO.print("Mauvaise entrée");
+            return selectContent();
+        }
+    }
+
+    public Content selectVirus() { //Même fonction qu'au dessus mais juste avec les cellules uniquement
+        String input = IO.input("Quelle case voulez vous choisir ? (Ex : A 1)\n");
+        if (input.matches(String.format("[a-%cA-%c][ \\-]?\\d{1,2}", (char) ('a' + MAP_SIZE), (char) ('A' + MAP_SIZE)))) {
+            String[] arr = input.split("[ -]");
+            char col = arr[0].toUpperCase().charAt(0);
+            int x = col - 'A';
+            int y;
+            if (arr.length == 2) {
+                y = Integer.valueOf(arr[1]) - 1;
+            } else {
+                y = Integer.valueOf(arr[0].substring(1)) - 1;
+                if (y > MAP_SIZE) {
+                    IO.print("Ligne trop élevée ( doit être compris entre 1 et " + MAP_SIZE);
+                    return selectContent();
+                }
+            }
+            Content content = selectContent(x, y);
+            if (content instanceof Virus) {
+                return content;
+            } else {
+                IO.print("Sélectionnez un virus, pas une cellule !");
+                return selectContent();
+            }
         } else {
             IO.print("Mauvaise entrée");
             return selectContent();
