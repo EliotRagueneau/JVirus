@@ -13,20 +13,24 @@ public class InfectedCell extends Cell implements Timed {
     }
 
     public InfectedCell fuse(Virus virus) {
-        return null;
+        virions.add(virus);
+        return this;
     }
 
     @Override
     public void turn() {
-        for (int i = virions.size() - 1; i >= 0; i--) {
-            lifeSpan--;
+        lifeSpan--;
 
-            if (lifeSpan == 0) {
-                explode();
-            } else {
-                Virus newVirus = virions.get(i);
-                for (int nbNewVirus = 0; nbNewVirus < newVirus.getVirulence(); nbNewVirus++) {
-                    virions.add(newVirus);
+        if (lifeSpan == 0) {
+            explode();
+
+        } else {
+
+            for (int i = virions.size() - 1; i >= 0; i--) {
+                Virus virus = virions.get(i);
+                for (int nbNewVirus = 0; nbNewVirus < virus.getVirulence(); nbNewVirus++) {
+                    virions.add(virus);
+//                    Virus a = (Virus) clone(virus);
                 }
             }
         }

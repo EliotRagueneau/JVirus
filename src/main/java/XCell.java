@@ -3,8 +3,12 @@ public class XCell extends ImmunizedCell {
         super(x, y);
     }
 
+    public XCell() {
+        super(0, 0);
+    }
+
     @Override
-    protected void show() {
+    public void show() {
         System.out.print(" X ");
     }
 }

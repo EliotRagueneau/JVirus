@@ -12,7 +12,7 @@ public abstract class Virus extends Content implements Timed {
     }
 
     @Override
-    protected void show() {
+    public void show() {
         System.out.print(" 0 ");
     }
 
@@ -32,7 +32,7 @@ public abstract class Virus extends Content implements Timed {
         }
     }
 
-    public Content fuse(Cell cell){
+    public Cell fuse(Cell cell) {
         return cell.fuse(this);
     }
 }

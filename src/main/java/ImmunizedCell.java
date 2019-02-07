@@ -4,7 +4,7 @@ public abstract class ImmunizedCell extends Cell{
     }
 
     @Override
-    ImmunizedCell fuse(Virus virus) {
+    public ImmunizedCell fuse(Virus virus) {
         return this;
     }
 }

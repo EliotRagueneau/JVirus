@@ -5,7 +5,7 @@ public class ZCell extends SensibleCell {
     }
 
     @Override
-    protected void show() {
+    public void show() {
         System.out.print(" Z ");
     }
 }

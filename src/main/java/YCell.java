@@ -5,7 +5,7 @@ public class YCell extends SensibleCell {
     }
 
     @Override
-    protected void show() {
+    public void show() {
         System.out.print(" Y ");
     }
 

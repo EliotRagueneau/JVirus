@@ -15,5 +15,5 @@ public abstract class Cell extends Content {
         }
     }
 
-    abstract Cell fuse(Virus virus);
+    public abstract Cell fuse(Virus virus);
 }

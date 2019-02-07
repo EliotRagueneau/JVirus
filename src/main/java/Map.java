@@ -13,6 +13,10 @@ public class Map {
         this.MAP_SIZE = MAP_SIZE;
         map = new Content[MAP_SIZE][MAP_SIZE];
 
+        List<Content> toAdd = new ArrayList<>();
+
+        toAdd.addAll(XCell.getNInstances(30));
+
         List<int[]> empties = new ArrayList<>();
 
         for (int x = 0; x < MAP_SIZE; x++) {
@@ -39,18 +43,27 @@ public class Map {
             } else {
                 map[y][x] = new VirusA(x, y);
             }
-            show();
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.print("\033[H\033[2J");
-            System.out.flush();
+//            show();
+//            try {
+//                Thread.sleep(10);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            System.out.print("\033[H\033[2J");
+//            System.out.flush();
         }
 
         show();
-        Content a = selectContent();
+
+        Content a = new YCell(0, 0);
+        Content b = new VirusA(0, 0);
+        ((VirusA) b).turn();
+        Content c = a.fuse(b);
+        ((InfectedCell) c).turn();
+        ((InfectedCell) c).turn();
+        ((InfectedCell) c).turn();
+        c.show();
+
     }
 
     public void show() {
