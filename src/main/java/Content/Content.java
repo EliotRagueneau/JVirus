@@ -1,3 +1,8 @@
+package Content;
+
+import Content.Cell.Cell;
+import Content.Virus.Virus;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +42,7 @@ public class Content implements Cloneable {
         return out;
     }
 
-    protected Content() {
+    public Content() {
     }
 
     public boolean isEmpty() {
@@ -66,6 +71,6 @@ public class Content implements Cloneable {
         return null;
     }
 
-    public void menu(Case selectedCase) {
-    }
+//    public void menu(Case selectedCase) {
+//    }
 }

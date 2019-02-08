@@ -1,3 +1,11 @@
+import Content.*;
+
+import Content.Cell.Cell;
+import Content.Cell.ImmunizedCell.XCell;
+import Content.Cell.SensibleCell.YCell;
+import Content.Cell.SensibleCell.ZCell;
+import Content.Virus.Virus;
+import Content.Virus.VirusA;
 import Utils.IO;
 
 import java.util.ArrayList;
@@ -27,7 +35,7 @@ public class Game {
                 selectedCase.menu(); //Appel du menu de la cellule sélectionnée
             }
             for (int i = 0; i < 1; i++) {
-                IO.print("Virus, tour : " + (i + 1) + "\n");
+                IO.print("Content.Virus.Virus, tour : " + (i + 1) + "\n");
                 Case selectedCase = map.selectCase(Virus.class); //Selection uniquement des cellules
                 selectedCase.menu(); //Appel du menu de la cellule sélectionnée
             }

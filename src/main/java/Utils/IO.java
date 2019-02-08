@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-@SuppressWarnings("ALL")
+
 public class IO {
     public static void print(String message) {
         System.out.print(message);

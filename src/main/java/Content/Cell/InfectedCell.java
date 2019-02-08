@@ -1,8 +1,14 @@
+package Content.Cell;
+
+import Content.Timed;
+import Content.Enums.TurnOver;
+import Content.Virus.Virus;
+
 import java.util.Vector;
 
 public class InfectedCell extends Cell implements Timed {
 
-    private Vector<Virus> virions = new Vector<>();
+    private final Vector<Virus> virions = new Vector<>();
 
     private int lifeSpan;
 

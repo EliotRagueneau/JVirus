@@ -1,3 +1,5 @@
+package Content.Cell.SensibleCell;
+
 public class YCell extends SensibleCell {
 
     public YCell() {

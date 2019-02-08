@@ -1,3 +1,9 @@
+package Content.Cell.SensibleCell;
+
+import Content.Cell.Cell;
+import Content.Cell.InfectedCell;
+import Content.Virus.Virus;
+
 import java.lang.reflect.InvocationTargetException;
 
 public abstract class SensibleCell extends Cell {
@@ -27,16 +33,16 @@ public abstract class SensibleCell extends Cell {
 //        Map map = Game.getMap();
 //        switch (rep) {
 //            case 8:
-//                map.move(selectedCase, Direction.UP);
+//                map.move(selectedCase, Content.Enums.Direction.UP);
 //                break;
 //            case 2:
-//                map.move(selectedCase, Direction.DOWN);
+//                map.move(selectedCase, Content.Enums.Direction.DOWN);
 //                break;
 //            case 4:
-//                map.move(selectedCase, Direction.LEFT);
+//                map.move(selectedCase, Content.Enums.Direction.LEFT);
 //                break;
 //            case 6:
-//                map.move(selectedCase, Direction.RIGHT);
+//                map.move(selectedCase, Content.Enums.Direction.RIGHT);
 //                break;
 //        }
 //    }

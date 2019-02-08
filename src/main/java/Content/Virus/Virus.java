@@ -1,9 +1,15 @@
+package Content.Virus;
+
+import Content.Cell.Cell;
+import Content.Content;
+import Content.Timed;
+import Content.Enums.*;
 import Utils.IO;
 
 public class Virus extends Content implements Timed, Cloneable {
     protected int lifeSpan;
-    protected int virulence;
-    protected int infectionTime;
+    protected final int virulence;
+    protected final int infectionTime;
 
     public Virus(int lifeSpan, int virulence, int infectionTime) {
         super();
@@ -59,16 +65,16 @@ public class Virus extends Content implements Timed, Cloneable {
 //        Map map = Game.getMap();
 //        switch (rep) {
 //            case 8:
-//                map.move(selectedCase, Direction.UP);
+//                map.move(selectedCase, Content.Enums.Direction.UP);
 //                break;
 //            case 2:
-//                map.move(selectedCase, Direction.DOWN);
+//                map.move(selectedCase, Content.Enums.Direction.DOWN);
 //                break;
 //            case 4:
-//                map.move(selectedCase, Direction.LEFT);
+//                map.move(selectedCase, Content.Enums.Direction.LEFT);
 //                break;
 //            case 6:
-//                map.move(selectedCase, Direction.RIGHT);
+//                map.move(selectedCase, Content.Enums.Direction.RIGHT);
 //                break;
 //        }
 //    }

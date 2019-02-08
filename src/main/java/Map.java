@@ -1,3 +1,6 @@
+import Content.*;
+import Content.Enums.Direction;
+import Content.Enums.TurnOver;
 import Utils.IO;
 
 import java.lang.reflect.InvocationTargetException;
@@ -6,9 +9,9 @@ import java.util.List;
 import java.util.Random;
 
 public class Map implements Timed {
-    public int MAP_SIZE;
+    public final int MAP_SIZE;
 
-    private Content[][] map;
+    private final Content[][] map;
 
     public Map(int MAP_SIZE, List<Content> toSpawn) {
         this.MAP_SIZE = MAP_SIZE;
@@ -36,13 +39,13 @@ public class Map implements Timed {
 
 //        show();
 //
-//        Content a = new YCell();
-//        Content b = new VirusA();
-//        ((VirusA) b).turn();
-//        Content c = a.fuse(b);
-//        ((InfectedCell) c).turn();
-//        ((InfectedCell) c).turn();
-//        ((InfectedCell) c).turn();
+//        Content.Content a = new Content.Cell.SensibleCell.YCell();
+//        Content.Content b = new Content.Virus.VirusA();
+//        ((Content.Virus.VirusA) b).turn();
+//        Content.Content c = a.fuse(b);
+//        ((Content.Cell.InfectedCell) c).turn();
+//        ((Content.Cell.InfectedCell) c).turn();
+//        ((Content.Cell.InfectedCell) c).turn();
 //        c.show();
 
     }
@@ -60,7 +63,7 @@ public class Map implements Timed {
         headline.append('\n');
         line.append("┐\n");
 
-//        Print Border + Content
+//        Print Border + Content.Content
         System.out.print(headline.toString());
         System.out.print(line.toString());
 

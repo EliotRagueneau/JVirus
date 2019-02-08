@@ -1,9 +1,11 @@
+import Content.Content;
+import Content.Enums.Direction;
 import Utils.IO;
 
 public class Case {
-    public int x;
-    public int y;
-    public Content content;
+    public final int x;
+    public final int y;
+    public final Content content;
 
     public Case(int x, int y, Content content) {
         this.x = x;

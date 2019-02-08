@@ -1,7 +1,11 @@
+package Content.Cell;
+
+import Content.Content;
+import Content.Virus.Virus;
 import Utils.IO;
 
 public abstract class Cell extends Content {
-    protected int immunityLevel;
+    protected final int immunityLevel;
 
     public Cell(int immunityLevel) {
         super();
