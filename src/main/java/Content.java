@@ -1,16 +1,35 @@
-import java.lang.invoke.MethodHandles;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Content {
+public class Content implements Cloneable {
     protected boolean empty = true;
+    protected boolean movable = true;
+    protected char symbol = '·';
 
-    public static List<Content> getNInstances(int n) {
+    public boolean isMovable() {
+        return movable;
+    }
+
+    public void setMovable(boolean movable) {
+        this.movable = movable;
+    }
+
+    public Object clone() {
+        try {
+            return super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Content> getNInstances(int n) {
         List<Content> out = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             try {
-                out.add((Content) MethodHandles.lookup().lookupClass().getConstructor().newInstance());
+                Content newChildInstance = getClass().getConstructor().newInstance();
+                out.add(newChildInstance);
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                 e.printStackTrace();
             }
@@ -26,7 +45,7 @@ public class Content {
     }
 
     public void show() {
-        System.out.print(" · ");
+        System.out.print(String.format(" %c ", symbol));
     }
 
     public Content fuse(Content target) {
@@ -39,11 +58,11 @@ public class Content {
         }
     }
 
-    public Cell fuse(Cell cell) {
-        return cell;
+    public Content fuse(Cell cell) {
+        return null;
     }
 
-    public Cell fuse(Virus virus) {
+    public Content fuse(Virus virus) {
         return null;
     }
 

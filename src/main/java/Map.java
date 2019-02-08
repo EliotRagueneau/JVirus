@@ -10,13 +10,9 @@ public class Map implements Timed {
 
     private Content[][] map;
 
-    public Map(int MAP_SIZE) {
+    public Map(int MAP_SIZE, List<Content> toSpawn) {
         this.MAP_SIZE = MAP_SIZE;
         map = new Content[MAP_SIZE][MAP_SIZE];
-
-//        List<Content> toAdd = new ArrayList<>();
-
-//        toAdd.addAll(XCell.getNInstances(30));
 
         List<int[]> empties = new ArrayList<>();
 
@@ -29,47 +25,30 @@ public class Map implements Timed {
 
         Random rand = new Random();
 
-        for (int n = 0; n < 110; n++) {
-
+        while (!toSpawn.isEmpty()) {
+            Content content = toSpawn.remove(toSpawn.size() - 1);
             int[] coords = empties.remove(rand.nextInt(empties.size()));
             int x = coords[0];
             int y = coords[1];
 
-            if (n < 33) {
-                map[y][x] = new XCell();
-            } else if (n < 66) {
-                map[y][x] = new YCell();
-            } else if (n < 100) {
-                map[y][x] = new ZCell();
-            } else {
-                map[y][x] = new VirusA();
-            }
-//            show();
-//            try {
-//                Thread.sleep(10);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            System.out.print("\033[H\033[2J");
-//            System.out.flush();
+            map[y][x] = content;
         }
 
-        show();
-
-        Content a = new YCell();
-        Content b = new VirusA();
-        ((VirusA) b).turn();
-        Content c = a.fuse(b);
-        ((InfectedCell) c).turn();
-        ((InfectedCell) c).turn();
-        ((InfectedCell) c).turn();
+//        show();
+//
+//        Content a = new YCell();
+//        Content b = new VirusA();
+//        ((VirusA) b).turn();
+//        Content c = a.fuse(b);
+//        ((InfectedCell) c).turn();
+//        ((InfectedCell) c).turn();
+//        ((InfectedCell) c).turn();
 //        c.show();
 
     }
 
     public void show() {
 //        Generate Border
-
         StringBuilder headline = new StringBuilder("     ");
         StringBuilder line = new StringBuilder("   ┌");
 
@@ -78,12 +57,10 @@ public class Map implements Timed {
             headline.append("  ");
             line.append("───");
         }
-
         headline.append('\n');
         line.append("┐\n");
 
 //        Print Border + Content
-
         System.out.print(headline.toString());
         System.out.print(line.toString());
 
@@ -92,32 +69,26 @@ public class Map implements Timed {
             System.out.print(String.format("%2d", y + 1) + " │");
 
             for (int x = 0; x < MAP_SIZE; x++) {
-                selectContent(x, y).show();
+                map[y][x].show();
             }
-
             System.out.print("│ " + String.format("%-2d", y + 1) + '\n');
         }
-
         int length = line.length();
 
         System.out.print(line.replace(3, 4, "└")
                 .replace(length - 2, length - 1, "┘")
                 .toString());
-
         System.out.print(headline);
-    }
-
-    public Content selectContent(int x, int y) {
-        return map[y][x];
     }
 
     public Case selectCase(Class toChoose) {
         String input = IO.input("Quelle case voulez vous choisir ? (Ex : A 1)\n");
-        if (input.matches(String.format("[a-%cA-%c][ \\-]?\\d{1,2}", (char) ('a' + MAP_SIZE), (char) ('A' + MAP_SIZE)))) {
+        int x;
+        int y;
+        if (input.matches(String.format("[a-%cA-%c][ \\-]?\\d{1,2}", 'a' + MAP_SIZE, 'A' + MAP_SIZE))) {
             String[] arr = input.split("[ -]");
             char col = arr[0].toUpperCase().charAt(0);
-            int x = col - 'A';
-            int y;
+            x = col - 'A';
             if (arr.length == 2) {
                 y = Integer.valueOf(arr[1]) - 1;
             } else {
@@ -128,26 +99,61 @@ public class Map implements Timed {
                 }
             }
 
-            Content content = selectContent(x, y);
-            if (toChoose.isInstance(content)) {
-                return new Case(x, y, content);
-            } else {
-                try { //On récupère la méthode wrongSelect de l'objet choisi par ses coordonnées qui indique selon si c'est un virus ou une cellule qu'il faut sélectionner le bon objet (c'était pour le fun, mais ça rend bien !)
-                    toChoose.getMethod("wrongSelect", null).invoke(null);
-                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
-                }
-                return selectCase(toChoose);
-            }
+        } else if (input.matches(String.format("\\d{1,2}[ \\-]?[a-%cA-%c]", 'a' + MAP_SIZE, 'A' + MAP_SIZE))) {
+            String[] arr = input.split("[ -]");
+            char col = arr[arr.length - 1].toUpperCase().charAt(0);
+            // TODO Inverse du précédent
+            x = 0;
+            y = 0;
 
         } else {
             IO.print("Mauvaise entrée\n");
             return selectCase(toChoose);
         }
+
+        Content content = map[y][x];
+        if (toChoose.isInstance(content)) {
+            if (content.isMovable()) {
+                return new Case(x, y, content);
+            } else {
+                IO.print("Vous avez déjà déplacé cet élément, veuillez en choisir un autre.\n");
+                return selectCase(toChoose);
+            }
+
+        } else {
+            try { //On récupère la méthode wrongSelect de l'objet choisi par ses coordonnées qui indique selon si c'est un virus ou une cellule qu'il faut sélectionner le bon objet (c'était pour le fun, mais ça rend bien !)
+                toChoose.getMethod("wrongSelect", null).invoke(null);
+            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
+            }
+            return selectCase(toChoose);
+        }
     }
 
-    public void move(Case selectedCase, Direction direction) {
 
+    public void move(Case selCase, Direction direction) {
+        try {
+            switch (direction) {
+                case UP:
+                    map[selCase.y - 1][selCase.x] = selCase.content.fuse(map[selCase.y - 1][selCase.x]);
+                    break;
+                case DOWN:
+                    map[selCase.y + 1][selCase.x] = selCase.content.fuse(map[selCase.y + 1][selCase.x]);
+                    break;
+                case LEFT:
+                    map[selCase.y][selCase.x - 1] = selCase.content.fuse(map[selCase.y][selCase.x - 1]);
+                    break;
+                case RIGHT:
+                    map[selCase.y][selCase.x + 1] = selCase.content.fuse(map[selCase.y][selCase.x + 1]);
+                    break;
+            }
+            map[selCase.y][selCase.x] = new Content();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            IO.print("Vous allez sortir de la map...\n");
+            selCase.menu();
+        }
+        selCase.content.setMovable(false);
+        show();
     }
 
     @Override
@@ -155,9 +161,12 @@ public class Map implements Timed {
         for (int x = 0; x < MAP_SIZE; x++) {
             for (int y = 0; y < MAP_SIZE; y++) {
                 Content content = map[y][x];
+                content.setMovable(true);
                 if (content instanceof Timed) {
-                    switch (((Timed) content).turn()) {
+                    TurnOver turnOver = ((Timed) content).turn();
+                    switch (turnOver) {
                         case EXPLODE:
+                            // TODO explode
                             break;
                         case DIE:
                             map[y][x] = new Content();
@@ -168,6 +177,6 @@ public class Map implements Timed {
                 }
             }
         }
-        return null;
+        return TurnOver.NOTHING;
     }
 }

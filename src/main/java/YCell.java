@@ -2,11 +2,6 @@ public class YCell extends SensibleCell {
 
     public YCell() {
         super(3);
+        symbol = 'Y';
     }
-
-    @Override
-    public void show() {
-        System.out.print(" Y ");
-    }
-
 }

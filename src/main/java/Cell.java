@@ -9,7 +9,7 @@ public abstract class Cell extends Content {
         this.immunityLevel = immunityLevel;
     }
 
-    public Cell fuse(Cell cell) {
+    public Content fuse(Cell cell) {
         if (immunityLevel < cell.immunityLevel) {
             return this;
         } else {
@@ -17,7 +17,7 @@ public abstract class Cell extends Content {
         }
     }
 
-    public abstract Cell fuse(Virus virus);
+    public abstract Content fuse(Virus virus);
 
     public static void wrongSelect() {
         IO.print("Veuillez sélectionner une cellule !\n");

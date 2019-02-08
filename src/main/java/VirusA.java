@@ -1,5 +1,6 @@
 public class VirusA extends Virus {
     public VirusA() {
-        super(10, 1, 0);
+        super(9, 1, 0);
+//        symbol = '҉';
     }
 }
