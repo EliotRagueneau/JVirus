@@ -3,13 +3,13 @@ import Utils.IO;
 import java.lang.reflect.InvocationTargetException;
 
 public abstract class SensibleCell extends Cell {
-    public SensibleCell(int x, int y, int immunityLevel) {
-        super(x, y, immunityLevel);
+    public SensibleCell(int immunityLevel) {
+        super(immunityLevel);
     }
 
     public InfectedCell fuse(Virus virus) {
         try {
-            return new InfectedCell(x, y, immunityLevel, virus.getClass().getConstructor(new Class[]{int.class, int.class}).newInstance(x, y));
+            return new InfectedCell(immunityLevel, virus.getClass().getConstructor().newInstance());
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             e.printStackTrace();
             return null;
@@ -17,26 +17,29 @@ public abstract class SensibleCell extends Cell {
     }
 
     @Override
-    public void menu() {
-        super.menu();
-        IO.print("Que voulez-vous faire avec cette cellule immunisée ?\n");
+    public void menu(Case selectedCase) {
+        super.menu(selectedCase);
+        IO.print("Que voulez-vous faire avec cette cellule ?\n");
         IO.print("8 : Vous déplacer vers le haut\n");
         IO.print("2 : Vous déplacer vers le bas\n");
         IO.print("4 : Vous déplacer vers la gauche\n");
         IO.print("6 : Vous déplacer vers la droite\n");
 //        IO.print("0 : Commettre l'irréparable... l'apoptose !\n");
         int rep = IO.intInput();
-        switch (rep){
+        Map map = Game.getMap();
+        switch (rep) {
             case 8:
-                move(Direction.UP);
+                map.move(selectedCase, Direction.UP);
+                break;
             case 2:
-                move(Direction.DOWN);
+                map.move(selectedCase, Direction.DOWN);
+                break;
             case 4:
-                move(Direction.LEFT);
+                map.move(selectedCase, Direction.LEFT);
+                break;
             case 6:
-                move(Direction.RIGHT);
-//            case 0:
-//                apoptose();
+                map.move(selectedCase, Direction.RIGHT);
+                break;
         }
     }
 }

@@ -1,7 +1,7 @@
 public class YCell extends SensibleCell {
 
-    public YCell(int x, int y) {
-        super(x, y, 3);
+    public YCell() {
+        super(3);
     }
 
     @Override

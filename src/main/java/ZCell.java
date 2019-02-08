@@ -1,7 +1,7 @@
 public class ZCell extends SensibleCell {
 
-    public ZCell(int x, int y) {
-        super(x, y, 0);
+    public ZCell() {
+        super(0);
     }
 
     @Override

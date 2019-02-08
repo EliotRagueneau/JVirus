@@ -1,3 +1,3 @@
 public interface Timed {
-    void turn();
+    TurnOver turn();
 }

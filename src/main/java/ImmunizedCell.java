@@ -1,8 +1,8 @@
 import Utils.IO;
 
-public abstract class ImmunizedCell extends Cell{
-    public ImmunizedCell(int x, int y) {
-        super(x, y, 999);
+public abstract class ImmunizedCell extends Cell {
+    public ImmunizedCell() {
+        super(999);
     }
 
     @Override
@@ -11,23 +11,28 @@ public abstract class ImmunizedCell extends Cell{
     }
 
     @Override
-    public void menu() {
-        super.menu();
+    public void menu(Case selectedCase) {
+        super.menu(selectedCase);
         IO.print("Que voulez-vous faire avec cette cellule immunisée ?\n");
         IO.print("8 : Vous déplacer vers le haut\n");
         IO.print("2 : Vous déplacer vers le bas\n");
         IO.print("4 : Vous déplacer vers la gauche\n");
         IO.print("6 : Vous déplacer vers la droite\n");
         int rep = IO.intInput();
-        switch (rep){
+        Map map = Game.getMap();
+        switch (rep) {
             case 8:
-                move(Direction.UP);
+                map.move(selectedCase, Direction.UP);
+                break;
             case 2:
-                move(Direction.DOWN);
+                map.move(selectedCase, Direction.DOWN);
+                break;
             case 4:
-                move(Direction.LEFT);
+                map.move(selectedCase, Direction.LEFT);
+                break;
             case 6:
-                move(Direction.RIGHT);
+                map.move(selectedCase, Direction.RIGHT);
+                break;
         }
     }
 }

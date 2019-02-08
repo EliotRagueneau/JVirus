@@ -7,11 +7,11 @@ import java.io.InputStreamReader;
 @SuppressWarnings("ALL")
 public class IO {
     public static void print(String message) {
-        System.out.println(message);
+        System.out.print(message);
     }
 
     public static void print(int nombre) {
-        System.out.println(nombre);
+        System.out.print(nombre);
     }
 
     public static String input() {

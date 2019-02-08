@@ -6,8 +6,8 @@ public class InfectedCell extends Cell implements Timed {
 
     private int lifeSpan;
 
-    public InfectedCell(int x, int y, int immunityLevel, Virus pathogen) {
-        super(x, y, immunityLevel);
+    public InfectedCell(int immunityLevel, Virus pathogen) {
+        super(immunityLevel);
         virions.add(pathogen);
         lifeSpan = pathogen.getInfectionTime() + immunityLevel;
     }
@@ -18,14 +18,11 @@ public class InfectedCell extends Cell implements Timed {
     }
 
     @Override
-    public void turn() {
+    public TurnOver turn() {
         lifeSpan--;
-
         if (lifeSpan == 0) {
-            explode();
-
+            return TurnOver.EXPLODE;
         } else {
-
             for (int i = virions.size() - 1; i >= 0; i--) {
                 Virus virus = virions.get(i);
                 for (int nbNewVirus = 0; nbNewVirus < virus.getVirulence(); nbNewVirus++) {
@@ -34,6 +31,7 @@ public class InfectedCell extends Cell implements Timed {
                 }
             }
         }
+        return null;
     }
 
     private void explode() {

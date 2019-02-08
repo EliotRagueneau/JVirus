@@ -1,15 +1,9 @@
-import Utils.IO;
-
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Content {
-    protected int y;
-
-    protected int x;
-
     protected boolean empty = true;
 
     public static List<Content> getNInstances(int n) {
@@ -24,9 +18,7 @@ public class Content {
         return out;
     }
 
-    protected Content(int x, int y) {
-        this.y = y;
-        this.x = x;
+    protected Content() {
     }
 
     public boolean isEmpty() {
@@ -35,29 +27,6 @@ public class Content {
 
     public void show() {
         System.out.print(" · ");
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    protected void move(Direction dir) {
-        Map map = Game.getMap();
-        switch (dir) {
-            case UP:
-                if (y > 0) {
-                    y--;
-                    Content target = map.selectContent(x, y);
-                    map.replaceContent(x, y, this.fuse(target));
-                }
-                break;
-            case RIGHT:
-
-        }
     }
 
     public Content fuse(Content target) {
@@ -78,6 +47,6 @@ public class Content {
         return null;
     }
 
-    public void menu() {
+    public void menu(Case selectedCase) {
     }
 }
