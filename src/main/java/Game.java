@@ -33,11 +33,13 @@ public class Game {
                 IO.print("Cellules, tour : " + (i + 1) + "\n");
                 Case selectedCase = map.selectCase(Cell.class); //Selection uniquement des cellules
                 selectedCase.menu(); //Appel du menu de la cellule sélectionnée
+                map.show();
             }
             for (int i = 0; i < 1; i++) {
-                IO.print("Content.Virus.Virus, tour : " + (i + 1) + "\n");
+                IO.print("Virus, tour : " + (i + 1) + "\n");
                 Case selectedCase = map.selectCase(Virus.class); //Selection uniquement des cellules
                 selectedCase.menu(); //Appel du menu de la cellule sélectionnée
+                map.show();
             }
             map.turn();
         }

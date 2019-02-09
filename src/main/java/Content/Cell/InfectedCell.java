@@ -24,6 +24,10 @@ public class InfectedCell extends Cell implements Timed {
         return this;
     }
 
+    public Vector<Virus> getVirions() {
+        return virions;
+    }
+
     @Override
     public TurnOver turn() {
         lifeSpan--;

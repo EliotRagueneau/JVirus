@@ -1,5 +1,8 @@
+import Content.Cell.Cell;
+import Content.Cell.InfectedCell;
 import Content.Content;
 import Content.Enums.Direction;
+import Content.Virus.Virus;
 import Utils.IO;
 
 public class Case {
@@ -15,10 +18,24 @@ public class Case {
 
     public void menu() {
         IO.print("Que voulez-vous faire avec cet élément ?\n");
-        IO.print("8 : Vous déplacer vers le haut\n");
-        IO.print("2 : Vous déplacer vers le bas\n");
-        IO.print("4 : Vous déplacer vers la gauche\n");
-        IO.print("6 : Vous déplacer vers la droite\n");
+        if (content instanceof InfectedCell) {
+            IO.print("5 : Apoptose\n");
+        } else {
+            if (y != 0) {
+                IO.print("8 : Vous déplacer vers le haut\n");
+            }
+            if (y != Game.getMap().MAP_SIZE) {
+                IO.print("2 : Vous déplacer vers le bas\n");
+            }
+            if (x != 0) {
+                IO.print("4 : Vous déplacer vers la gauche\n");
+            }
+            if (x != Game.getMap().MAP_SIZE) {
+                IO.print("6 : Vous déplacer vers la droite\n");
+            }
+        }
+        IO.print("0 : Je ne voulais pas sélectionner cet élément\n");
+
         int rep = IO.intInput();
         Map map = Game.getMap();
         switch (rep) {
@@ -33,6 +50,18 @@ public class Case {
                 break;
             case 6:
                 map.move(this, Direction.RIGHT);
+                break;
+            case 5:
+                if (content instanceof InfectedCell) {
+                    map.explode(this);
+                }
+                break;
+            case 0:
+                if (content instanceof Cell) {
+                    map.selectCase(Cell.class).menu();
+                } else {
+                    map.selectCase(Virus.class).menu();
+                }
                 break;
         }
     }

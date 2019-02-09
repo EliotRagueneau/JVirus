@@ -1,12 +1,15 @@
 import Content.*;
+import Content.Cell.InfectedCell;
 import Content.Enums.Direction;
 import Content.Enums.TurnOver;
+import Content.Virus.Virus;
 import Utils.IO;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Vector;
 
 public class Map implements Timed {
     public final int MAP_SIZE;
@@ -156,7 +159,6 @@ public class Map implements Timed {
             selCase.menu();
         }
         selCase.content.setMovable(false);
-        show();
     }
 
     @Override
@@ -169,7 +171,7 @@ public class Map implements Timed {
                     TurnOver turnOver = ((Timed) content).turn();
                     switch (turnOver) {
                         case EXPLODE:
-                            // TODO explode
+                            explode(new Case(x, y, content));
                             break;
                         case DIE:
                             map[y][x] = new Content();
@@ -181,5 +183,13 @@ public class Map implements Timed {
             }
         }
         return TurnOver.NOTHING;
+    }
+
+
+    public void explode(Case c) {
+        map[c.y][c.x] = new Content();
+        Vector<Virus> toSpread = ((InfectedCell) c.content).getVirions();
+        //TODO Méthode explosion
+
     }
 }
