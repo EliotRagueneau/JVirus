@@ -1,7 +1,8 @@
-import Content.*;
 import Content.Cell.InfectedCell;
+import Content.Content;
 import Content.Enums.Direction;
 import Content.Enums.TurnOver;
+import Content.Timed;
 import Content.Virus.Virus;
 import Utils.IO;
 
@@ -183,13 +184,15 @@ public class Map implements Timed {
             }
         }
         return TurnOver.NOTHING;
+
     }
 
 
     public void explode(Case c) {
         map[c.y][c.x] = new Content();
-        Vector<Virus> toSpread = ((InfectedCell) c.content).getVirions();
+        Vector<Virus> toSpread =((InfectedCell) c.content).getVirions();
         //TODO Méthode explosion
-
     }
+
+
 }

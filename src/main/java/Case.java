@@ -3,6 +3,7 @@ import Content.Cell.InfectedCell;
 import Content.Content;
 import Content.Enums.Direction;
 import Content.Virus.Virus;
+import Content.Info;
 import Utils.IO;
 
 public class Case {
@@ -17,6 +18,10 @@ public class Case {
     }
 
     public void menu() {
+        IO.print(String.format("Vous avez sélectionné la case %c-%d\n", 'A' + x, y + 1));
+        if (content instanceof Info){
+            ((Info) content).info();
+        }
         IO.print("Que voulez-vous faire avec cet élément ?\n");
         if (content instanceof InfectedCell) {
             IO.print("5 : Apoptose\n");
@@ -24,13 +29,13 @@ public class Case {
             if (y != 0) {
                 IO.print("8 : Vous déplacer vers le haut\n");
             }
-            if (y != Game.getMap().MAP_SIZE) {
+            if (y != Game.getMap().MAP_SIZE - 1) {
                 IO.print("2 : Vous déplacer vers le bas\n");
             }
             if (x != 0) {
                 IO.print("4 : Vous déplacer vers la gauche\n");
             }
-            if (x != Game.getMap().MAP_SIZE) {
+            if (x != Game.getMap().MAP_SIZE - 1) {
                 IO.print("6 : Vous déplacer vers la droite\n");
             }
         }
@@ -54,6 +59,9 @@ public class Case {
             case 5:
                 if (content instanceof InfectedCell) {
                     map.explode(this);
+                } else {
+                    IO.print("Mauvaise entrée");
+                    menu();
                 }
                 break;
             case 0:

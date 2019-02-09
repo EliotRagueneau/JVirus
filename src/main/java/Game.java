@@ -1,9 +1,8 @@
-import Content.*;
-
 import Content.Cell.Cell;
 import Content.Cell.ImmunizedCell.XCell;
 import Content.Cell.SensibleCell.YCell;
 import Content.Cell.SensibleCell.ZCell;
+import Content.Content;
 import Content.Virus.Virus;
 import Content.Virus.VirusA;
 import Utils.IO;

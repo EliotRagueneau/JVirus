@@ -1,16 +1,24 @@
 package Content.Cell;
 
-import Content.Timed;
 import Content.Enums.TurnOver;
+import Content.Info;
+import Content.Timed;
 import Content.Virus.Virus;
+import Utils.IO;
 
 import java.util.Vector;
 
-public class InfectedCell extends Cell implements Timed {
+public class InfectedCell extends Cell implements Timed, Info {
 
     private final Vector<Virus> virions = new Vector<>();
 
     private int lifeSpan;
+
+    @Override
+    public void info() {
+        IO.print(String.format("Cette cellule infectée possède %d virus en elle.\n", virions.size()));
+        IO.print(String.format("Elle exploseras dans %d tours.\n", lifeSpan));
+    }
 
     public InfectedCell(int immunityLevel, Virus pathogen) {
         super(immunityLevel);

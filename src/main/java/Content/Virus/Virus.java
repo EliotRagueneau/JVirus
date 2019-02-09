@@ -2,19 +2,25 @@ package Content.Virus;
 
 import Content.Cell.Cell;
 import Content.Content;
+import Content.Enums.TurnOver;
 import Content.Timed;
-import Content.Enums.*;
+import Content.Info;
 import Utils.IO;
 
-public class Virus extends Content implements Timed, Cloneable {
+public class Virus extends Content implements Timed, Cloneable, Info {
     protected int lifeSpan;
     protected final int virulence;
     protected final int infectionTime;
 
+    @Override
+    public void info() {
+        IO.print(String.format("Ce virus vas mourir dans %d tours !\n", lifeSpan));
+    }
+
     public Virus(int lifeSpan, int virulence, int infectionTime) {
         super();
         empty = false;
-        symbol = '9';
+        symbol = '*';
         this.lifeSpan = lifeSpan;
         this.virulence = virulence;
         this.infectionTime = infectionTime;
@@ -47,7 +53,6 @@ public class Virus extends Content implements Timed, Cloneable {
     @Override
     public TurnOver turn() {
         lifeSpan--;
-        symbol = (char) (lifeSpan + 48);
         if (lifeSpan == 0) {
             return TurnOver.DIE;
         }
