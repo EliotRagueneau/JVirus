@@ -1,3 +1,6 @@
+package Controller;
+
+import Content.Cell.Cell;
 import Content.Cell.InfectedCell;
 import Content.Content;
 import Content.Enums.Direction;
@@ -5,23 +8,29 @@ import Content.Enums.TurnOver;
 import Content.Timed;
 import Content.Virus.Virus;
 import Utils.IO;
+import Content.Case;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Vector;
+import java.util.*;
 
 public class Map implements Timed {
     public final int MAP_SIZE;
+    
+    private final static Random RANDOM = new Random();
 
     private final Content[][] map;
+
+    private final List<Case> cells = new LinkedList<>();
+
+    public List<Case> getCellCases() {
+        return cells;
+    }
 
     public Map(int MAP_SIZE, List<Content> toSpawn) {
         this.MAP_SIZE = MAP_SIZE;
         map = new Content[MAP_SIZE][MAP_SIZE];
 
-        List<int[]> empties = new ArrayList<>();
+        List<int[]> empties = new LinkedList<>();
 
         for (int x = 0; x < MAP_SIZE; x++) {
             for (int y = 0; y < MAP_SIZE; y++) {
@@ -30,15 +39,18 @@ public class Map implements Timed {
             }
         }
 
-        Random rand = new Random();
+
 
         while (!toSpawn.isEmpty()) {
             Content content = toSpawn.remove(toSpawn.size() - 1);
-            int[] coords = empties.remove(rand.nextInt(empties.size()));
+            int[] coords = empties.remove(RANDOM.nextInt(empties.size()));
             int x = coords[0];
             int y = coords[1];
 
             map[y][x] = content;
+            if (content instanceof Cell) {
+                cells.add(new Case(x, y, content));
+            }
         }
 
 //        show();
@@ -55,6 +67,7 @@ public class Map implements Timed {
     }
 
     public void show() {
+        IO.clearConsole();
 //        Generate Border
         StringBuilder headline = new StringBuilder("     ");
         StringBuilder line = new StringBuilder("   ┌");
@@ -164,10 +177,14 @@ public class Map implements Timed {
 
     @Override
     public TurnOver turn() {
+        cells.clear();
         for (int x = 0; x < MAP_SIZE; x++) {
             for (int y = 0; y < MAP_SIZE; y++) {
                 Content content = map[y][x];
                 content.setMovable(true);
+                if (content instanceof Cell) {
+                    cells.add(new Case(x, y, content));
+                }
                 if (content instanceof Timed) {
                     TurnOver turnOver = ((Timed) content).turn();
                     switch (turnOver) {
@@ -190,7 +207,7 @@ public class Map implements Timed {
 
     public void explode(Case c) {
         map[c.y][c.x] = new Content();
-        Vector<Virus> toSpread =((InfectedCell) c.content).getVirions();
+        Vector<Virus> toSpread = ((InfectedCell) c.content).getVirions();
         //TODO Méthode explosion
     }
 

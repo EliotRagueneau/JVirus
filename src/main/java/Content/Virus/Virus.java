@@ -59,7 +59,7 @@ public class Virus extends Content implements Timed, Cloneable, Info {
         return TurnOver.NOTHING;
     }
 
-//    public void menu(Case selectedCase) {
+//    public void menu(Content.Case selectedCase) {
 //        super.menu(selectedCase);
 //        IO.print("Que voulez-vous faire avec ce virus ?\n");
 //        IO.print("8 : Vous déplacer vers le haut\n");
@@ -67,7 +67,7 @@ public class Virus extends Content implements Timed, Cloneable, Info {
 //        IO.print("4 : Vous déplacer vers la gauche\n");
 //        IO.print("6 : Vous déplacer vers la droite\n");
 //        int rep = IO.intInput();
-//        Map map = Game.getMap();
+//        Controller.Map map = Controller.Game.getMap();
 //        switch (rep) {
 //            case 8:
 //                map.move(selectedCase, Content.Enums.Direction.UP);

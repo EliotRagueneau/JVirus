@@ -1,10 +1,11 @@
+package Content;
+
 import Content.Cell.Cell;
 import Content.Cell.InfectedCell;
-import Content.Content;
 import Content.Enums.Direction;
 import Content.Virus.Virus;
-import Content.Info;
 import Utils.IO;
+import Controller.*;
 
 public class Case {
     public final int x;

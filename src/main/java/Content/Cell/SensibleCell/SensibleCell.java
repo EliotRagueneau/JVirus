@@ -21,7 +21,7 @@ public abstract class SensibleCell extends Cell {
     }
 
 //    @Override
-//    public void menu(Case selectedCase) {
+//    public void menu(Content.Case selectedCase) {
 //        super.menu(selectedCase);
 //        IO.print("Que voulez-vous faire avec cette cellule ?\n");
 //        IO.print("8 : Vous déplacer vers le haut\n");
@@ -30,7 +30,7 @@ public abstract class SensibleCell extends Cell {
 //        IO.print("6 : Vous déplacer vers la droite\n");
 ////        IO.print("0 : Commettre l'irréparable... l'apoptose !\n");
 //        int rep = IO.intInput();
-//        Map map = Game.getMap();
+//        Controller.Map map = Controller.Game.getMap();
 //        switch (rep) {
 //            case 8:
 //                map.move(selectedCase, Content.Enums.Direction.UP);
