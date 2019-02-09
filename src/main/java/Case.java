@@ -19,7 +19,7 @@ public class Case {
 
     public void menu() {
         IO.print(String.format("Vous avez sélectionné la case %c-%d\n", 'A' + x, y + 1));
-        if (content instanceof Info){
+        if (content instanceof Info) {
             ((Info) content).info();
         }
         IO.print("Que voulez-vous faire avec cet élément ?\n");
@@ -43,6 +43,21 @@ public class Case {
 
         int rep = IO.intInput();
         Map map = Game.getMap();
+        if (content instanceof InfectedCell) {
+            switch (rep) {
+                case 5:
+                    map.explode(this);
+                    break;
+                case 0:
+                    map.selectCase(Cell.class).menu();
+                    break;
+                default:
+                    IO.print("Mauvaise entrée\n");
+                    menu();
+                    break;
+            }
+        }
+
         switch (rep) {
             case 8:
                 map.move(this, Direction.UP);
@@ -56,20 +71,16 @@ public class Case {
             case 6:
                 map.move(this, Direction.RIGHT);
                 break;
-            case 5:
-                if (content instanceof InfectedCell) {
-                    map.explode(this);
-                } else {
-                    IO.print("Mauvaise entrée");
-                    menu();
-                }
-                break;
             case 0:
                 if (content instanceof Cell) {
                     map.selectCase(Cell.class).menu();
                 } else {
                     map.selectCase(Virus.class).menu();
                 }
+                break;
+            default:
+                IO.print("Mauvaise entrée\n");
+                menu();
                 break;
         }
     }
