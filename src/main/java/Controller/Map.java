@@ -15,7 +15,7 @@ import java.util.*;
 
 public class Map implements Timed {
     public final int MAP_SIZE;
-    
+
     private final static Random RANDOM = new Random();
 
     private final Content[][] map;
@@ -38,7 +38,6 @@ public class Map implements Timed {
                 empties.add(new int[]{x, y});
             }
         }
-
 
 
         while (!toSpawn.isEmpty()) {
@@ -114,17 +113,20 @@ public class Map implements Timed {
             } else {
                 y = Integer.valueOf(arr[0].substring(1)) - 1;
                 if (y > MAP_SIZE) {
-                    IO.print("Ligne trop élevée ( doit être compris entre 1 et " + MAP_SIZE + ")\n");
+                    IO.print("Ligne trop élevée (doit être compris entre 1 et " + MAP_SIZE + ")\n");
                     return selectCase(toChoose);
                 }
             }
 
         } else if (input.matches(String.format("\\d{1,2}[ \\-]?[a-%cA-%c]", 'a' + MAP_SIZE, 'A' + MAP_SIZE))) {
-            String[] arr = input.split("[ -]");
-            char col = arr[arr.length - 1].toUpperCase().charAt(0);
-            // TODO Inverse du précédent
-            x = 0;
-            y = 0;
+            char col = input.toUpperCase().charAt(input.length() - 1);
+            x = col - 'A';
+            input = input.substring(0,input.length() - 1);
+            y = Integer.valueOf(input.split("[ -]")[0]) - 1;
+            if (y > MAP_SIZE) {
+                IO.print("Ligne trop élevée (doit être compris entre 1 et " + MAP_SIZE + ")\n");
+                return selectCase(toChoose);
+            }
 
         } else {
             IO.print("Mauvaise entrée\n");
