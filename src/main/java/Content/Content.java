@@ -71,6 +71,4 @@ public class Content implements Cloneable {
         return null;
     }
 
-//    public void menu(Content.Case selectedCase) {
-//    }
 }

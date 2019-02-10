@@ -18,16 +18,16 @@ import java.util.Random;
 public class Game {
     private static Map map;
     private static boolean vsPlayer = false;
+    private static int MAP_SIZE = 10;
 
     public static void init() {
         List<Content> toSpawn = new ArrayList<>();
+        toSpawn.addAll(new XCell().getNInstances((MAP_SIZE * MAP_SIZE) / 16));
+        toSpawn.addAll(new YCell().getNInstances((MAP_SIZE * MAP_SIZE) / 16));
+        toSpawn.addAll(new ZCell().getNInstances((MAP_SIZE * MAP_SIZE) / 16));
+        toSpawn.addAll(new VirusA().getNInstances((MAP_SIZE * MAP_SIZE) / 40));
 
-        toSpawn.addAll(new XCell().getNInstances(30));
-        toSpawn.addAll(new YCell().getNInstances(30));
-        toSpawn.addAll(new ZCell().getNInstances(30));
-        toSpawn.addAll(new VirusA().getNInstances(10));
-
-        map = new Map(20, toSpawn);
+        map = new Map(MAP_SIZE, toSpawn);
         menu();
     }
 
@@ -44,15 +44,15 @@ public class Game {
         while (true) {
             map.show();
             if (vsPlayer) {
-                for (int i = 0; i < 4; i++) {
+                for (int i = 0; i < 1; i++) {
                     IO.print("Cellules, tour : " + (i + 1) + "\n");
-                    Case selectedCase = map.selectCase(Cell.class); //Selection uniquement des cellules
-                    selectedCase.menu(); //Appel du menu de la cellule sélectionnée
+                    Case selectedCase = map.selectCase(Cell.class); //Appel de la méthode en spécifiant qu'on veut une classe Cell
+                    selectedCase.menu(); //Appel du menu
                     map.show();
                 }
             } else {
                 List<Case> cells = map.getCellCases();
-                for (int i = 0; i < 4; i++) {
+                for (int i = 0; i < 1; i++) {
                     Case cellCase = cells.remove(random.nextInt(cells.size()));
                     map.move(cellCase, Direction.randomDirection(cellCase));
                     try {
@@ -64,7 +64,7 @@ public class Game {
                 }
             }
 
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 1; i++) {
                 IO.print("Virus, tour : " + (i + 1) + "\n");
                 Case selectedCase = map.selectCase(Virus.class); //Selection uniquement des cellules
                 selectedCase.menu(); //Appel du menu de la cellule sélectionnée
