@@ -41,7 +41,6 @@ public class Case {
                 IO.print("6 : Vous déplacer vers la droite\n");
             }
         }
-        IO.print("5 : Passer son tour\n");
         IO.print("0 : Je ne voulais pas sélectionner cet élément\n");
 
         int rep = IO.intInput();
@@ -53,8 +52,6 @@ public class Case {
                     break;
                 case 0:
                     map.selectCase(Cell.class).menu();
-                    break;
-                case 5:
                     break;
                 default:
                     IO.print("Mauvaise entrée\n");

@@ -214,11 +214,21 @@ public class Map implements Timed {
     public void explode(Case c) {
         int a = c.x;
         int b = c.y;
+        Random r = new Random();
         map[c.y][c.x] = new Content();
         Vector<Virus> toSpread = ((InfectedCell) c.content).getVirions();
         for (Virus virion : toSpread) {
-            a++; //faire a+ random entre 1 et -1, pareil pour b, stocker les coordonnées dans une liste et vérifier qu'elles n'ait pas déjà été utilisées
+//            a += (1-r.nextInt(3)); //faire a+ random entre 1 et -1, pareil pour b, stocker les coordonnées dans une liste et vérifier qu'elles n'ait pas déjà été utilisées
+//            b += (1-r.nextInt(3));
+            a++;
+            IO.print("a : " + String.valueOf(a) + "\n");
+            IO.print("b : " + String.valueOf(b) + "\n");
             virion.fuse(map[b][a]);
+//            if (a <= MAP_SIZE && a >= 0 && b <= MAP_SIZE && b >=0) {
+//                if (map[b][a].isEmpty()) {
+//                    virion.fuse(map[b][a]);
+//                }
+//            }
         }
     }
 

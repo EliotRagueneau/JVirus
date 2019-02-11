@@ -3,8 +3,8 @@ package Content.Virus;
 import Content.Cell.Cell;
 import Content.Content;
 import Content.Enums.TurnOver;
-import Content.Timed;
 import Content.Info;
+import Content.Timed;
 import Utils.IO;
 
 public class Virus extends Content implements Timed, Cloneable, Info {
@@ -14,7 +14,7 @@ public class Virus extends Content implements Timed, Cloneable, Info {
 
     @Override
     public void info() {
-        IO.print(String.format("Ce virus vas mourir dans %d tours !\n", lifeSpan));
+        IO.print(String.format("Ce virus va mourir dans %d tours !\n", lifeSpan));
     }
 
     public Virus(int lifeSpan, int virulence, int infectionTime) {
