@@ -1,6 +1,6 @@
 import Controller.Game;
 
-public class Main {
+public class JVirus {
     public static void main(String[] args) {
         Game.init();
     }
