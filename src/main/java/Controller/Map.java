@@ -1,5 +1,6 @@
 package Controller;
 
+import Content.Case;
 import Content.Cell.Cell;
 import Content.Cell.InfectedCell;
 import Content.Content;
@@ -8,10 +9,12 @@ import Content.Enums.TurnOver;
 import Content.Timed;
 import Content.Virus.Virus;
 import Utils.IO;
-import Content.Case;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+import java.util.Vector;
 
 public class Map implements Timed {
     public final int MAP_SIZE;
@@ -101,9 +104,10 @@ public class Map implements Timed {
     }
 
     public Case selectCase(Class toChoose) {
-        String input = IO.input("Quelle case voulez vous choisir ? (Ex : A 1)\n");
+        String input = IO.input("Quelle case voulez vous choisir ? (Ex : A 1)\n(Passer son tour : 0)\n");
         int x;
         int y;
+//        if ("0".equals(input)){}
         if (input.matches(String.format("[a-%cA-%c][ \\-]?\\d{1,2}", 'a' + MAP_SIZE, 'A' + MAP_SIZE))) {
             String[] arr = input.split("[ -]");
             char col = arr[0].toUpperCase().charAt(0);
@@ -208,10 +212,24 @@ public class Map implements Timed {
 
 
     public void explode(Case c) {
+        int a = c.x;
+        int b = c.y;
+        Random r = new Random();
         map[c.y][c.x] = new Content();
         Vector<Virus> toSpread = ((InfectedCell) c.content).getVirions();
-        //TODO Méthode explosion
+        for (Virus virion : toSpread) {
+//            a += (1-r.nextInt(3)); //faire a+ random entre 1 et -1, pareil pour b, stocker les coordonnées dans une liste et vérifier qu'elles n'ait pas déjà été utilisées
+//            b += (1-r.nextInt(3));
+            a++;
+            IO.print("a : " + String.valueOf(a) + "\n");
+            IO.print("b : " + String.valueOf(b) + "\n");
+            virion.fuse(map[b][a]);
+//            if (a <= MAP_SIZE && a >= 0 && b <= MAP_SIZE && b >=0) {
+//                if (map[b][a].isEmpty()) {
+//                    virion.fuse(map[b][a]);
+//                }
+//            }
+        }
     }
-
 
 }
