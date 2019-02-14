@@ -8,9 +8,10 @@ import Content.Timed;
 import Utils.IO;
 
 public class Virus extends Content implements Timed, Cloneable, Info {
-    protected int lifeSpan;
+    protected final int lifeSpan;
     protected final int virulence;
     protected final int infectionTime;
+    protected int life;
 
     @Override
     public void info() {
@@ -20,8 +21,9 @@ public class Virus extends Content implements Timed, Cloneable, Info {
     public Virus(int lifeSpan, int virulence, int infectionTime) {
         super();
         empty = false;
-        symbol = '*';
+        symbol = '+';
         this.lifeSpan = lifeSpan;
+        this.life = lifeSpan;
         this.virulence = virulence;
         this.infectionTime = infectionTime;
     }
@@ -38,6 +40,10 @@ public class Virus extends Content implements Timed, Cloneable, Info {
         return infectionTime;
     }
 
+    public int getLifeSpan() {
+        return lifeSpan;
+    }
+
     @Override
     public Content fuse(Cell cell) {
         return cell.fuse(this);
@@ -50,37 +56,13 @@ public class Virus extends Content implements Timed, Cloneable, Info {
                 (this.infectionTime + virus.infectionTime) / 2);
     }
 
+
     @Override
     public TurnOver turn() {
-        lifeSpan--;
-        if (lifeSpan == 0) {
+        life--;
+        if (life <= 0) {
             return TurnOver.DIE;
         }
         return TurnOver.NOTHING;
     }
-
-//    public void menu(Content.Case selectedCase) {
-//        super.menu(selectedCase);
-//        IO.print("Que voulez-vous faire avec ce virus ?\n");
-//        IO.print("8 : Vous déplacer vers le haut\n");
-//        IO.print("2 : Vous déplacer vers le bas\n");
-//        IO.print("4 : Vous déplacer vers la gauche\n");
-//        IO.print("6 : Vous déplacer vers la droite\n");
-//        int rep = IO.intInput();
-//        Controller.Map map = Controller.Game.getMap();
-//        switch (rep) {
-//            case 8:
-//                map.move(selectedCase, Content.Enums.Direction.UP);
-//                break;
-//            case 2:
-//                map.move(selectedCase, Content.Enums.Direction.DOWN);
-//                break;
-//            case 4:
-//                map.move(selectedCase, Content.Enums.Direction.LEFT);
-//                break;
-//            case 6:
-//                map.move(selectedCase, Content.Enums.Direction.RIGHT);
-//                break;
-//        }
-//    }
 }

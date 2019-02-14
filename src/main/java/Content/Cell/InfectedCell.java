@@ -39,7 +39,7 @@ public class InfectedCell extends Cell implements Timed, Info {
     @Override
     public TurnOver turn() {
         lifeSpan--;
-        if (lifeSpan == 0) {
+        if (lifeSpan <= 0) {
             return TurnOver.EXPLODE;
         } else {
             for (int i = virions.size() - 1; i >= 0; i--) {
