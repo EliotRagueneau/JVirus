@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"Contents"},{"l":"Contents.Cells"},{"l":"Contents.Cells.ImmunizedCells"},{"l":"Contents.Cells.SensibleCells"},{"l":"Contents.Virus"},{"l":"Controller"},{"l":"Enums"},{"l":"Interfaces"},{"l":"Utils"}]
