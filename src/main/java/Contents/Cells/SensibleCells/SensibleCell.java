@@ -1,8 +1,8 @@
-package Content.Cell.SensibleCell;
+package Contents.Cells.SensibleCells;
 
-import Content.Cell.Cell;
-import Content.Cell.InfectedCell;
-import Content.Virus.Virus;
+import Contents.Cells.Cell;
+import Contents.Cells.InfectedCell;
+import Contents.Virus.Virus;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -11,6 +11,7 @@ public abstract class SensibleCell extends Cell {
         super(immunityLevel);
     }
 
+    @Override
     public InfectedCell fuse(Virus virus) {
         try {
             return new InfectedCell(immunityLevel, virus.getClass().getConstructor().newInstance());

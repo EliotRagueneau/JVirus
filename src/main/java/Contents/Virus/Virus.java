@@ -1,16 +1,29 @@
-package Content.Virus;
+package Contents.Virus;
 
-import Content.Cell.Cell;
-import Content.Content;
-import Content.Enums.TurnOver;
-import Content.Info;
-import Content.Timed;
+import Contents.Cells.Cell;
+import Contents.Content;
+import Contents.Enums.TurnCallBack;
+import Contents.Interfaces.Info;
+import Contents.Interfaces.Timed;
 import Utils.IO;
 
 public class Virus extends Content implements Timed, Cloneable, Info {
+    /**
+     * Maximum life possible
+     */
     protected final int lifeSpan;
+    /**
+     * Number of new viruses produced by turn and by virus in infected cells
+     */
     protected final int virulence;
+
+    /**
+     * Base time of infection of infected cells
+     */
     protected final int infectionTime;
+    /**
+     * Decreasing integer initiated with lifeSpan that will kill the virus when reaching 0
+     */
     protected int life;
 
     @Override
@@ -20,16 +33,11 @@ public class Virus extends Content implements Timed, Cloneable, Info {
 
     public Virus(int lifeSpan, int virulence, int infectionTime) {
         super();
-        empty = false;
         symbol = '+';
         this.lifeSpan = lifeSpan;
         this.life = lifeSpan;
         this.virulence = virulence;
         this.infectionTime = infectionTime;
-    }
-
-    public static void wrongSelect() {
-        IO.print("Veuillez sélectionner un virus !\n");
     }
 
     public int getVirulence() {
@@ -38,10 +46,6 @@ public class Virus extends Content implements Timed, Cloneable, Info {
 
     public int getInfectionTime() {
         return infectionTime;
-    }
-
-    public int getLifeSpan() {
-        return lifeSpan;
     }
 
     @Override
@@ -56,13 +60,15 @@ public class Virus extends Content implements Timed, Cloneable, Info {
                 (this.infectionTime + virus.infectionTime) / 2);
     }
 
-
+    /**
+     * @return DIE or NOTHING
+     */
     @Override
-    public TurnOver turn() {
+    public TurnCallBack turn() {
         life--;
         if (life <= 0) {
-            return TurnOver.DIE;
+            return TurnCallBack.DIE;
         }
-        return TurnOver.NOTHING;
+        return TurnCallBack.NOTHING;
     }
 }

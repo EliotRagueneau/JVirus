@@ -1,18 +1,20 @@
-package Content.Cell;
+package Contents.Cells;
 
-import Content.Content;
-import Content.Virus.Virus;
-import Utils.IO;
+import Contents.Content;
+import Contents.Virus.Virus;
 
 public abstract class Cell extends Content {
     protected final int immunityLevel;
 
+    /**
+     * @param immunityLevel Property of cells which rules fusion between cells AND infection time
+     */
     public Cell(int immunityLevel) {
         super();
-        empty = false;
         this.immunityLevel = immunityLevel;
     }
 
+    @Override
     public Content fuse(Cell cell) {
         if (immunityLevel < cell.immunityLevel) {
             return this;
@@ -21,9 +23,6 @@ public abstract class Cell extends Content {
         }
     }
 
+    @Override
     public abstract Content fuse(Virus virus);
-
-    public static void wrongSelect() {
-        IO.print("Veuillez sélectionner une cellule !\n");
-    }
 }

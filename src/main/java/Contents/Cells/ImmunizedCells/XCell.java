@@ -1,4 +1,4 @@
-package Content.Cell.ImmunizedCell;
+package Contents.Cells.ImmunizedCells;
 
 public class XCell extends ImmunizedCell {
     public XCell() {

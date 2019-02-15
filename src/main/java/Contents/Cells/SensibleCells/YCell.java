@@ -1,4 +1,4 @@
-package Content.Cell.SensibleCell;
+package Contents.Cells.SensibleCells;
 
 public class YCell extends SensibleCell {
 

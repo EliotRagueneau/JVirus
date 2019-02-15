@@ -1,10 +1,10 @@
-package Content.Cell.ImmunizedCell;
+package Contents.Cells.ImmunizedCells;
 
 
-import Content.Cell.Cell;
-import Content.Cell.InfectedCell;
-import Content.Content;
-import Content.Virus.Virus;
+import Contents.Cells.Cell;
+import Contents.Cells.InfectedCell;
+import Contents.Content;
+import Contents.Virus.Virus;
 
 public abstract class ImmunizedCell extends Cell {
     protected int life = 2;

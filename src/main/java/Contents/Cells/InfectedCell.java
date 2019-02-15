@@ -1,9 +1,9 @@
-package Content.Cell;
+package Contents.Cells;
 
-import Content.Enums.TurnOver;
-import Content.Info;
-import Content.Timed;
-import Content.Virus.Virus;
+import Contents.Enums.TurnCallBack;
+import Contents.Interfaces.Info;
+import Contents.Interfaces.Timed;
+import Contents.Virus.Virus;
 import Utils.IO;
 
 import java.util.Vector;
@@ -27,6 +27,7 @@ public class InfectedCell extends Cell implements Timed, Info {
         lifeSpan = pathogen.getInfectionTime() + immunityLevel;
     }
 
+    @Override
     public InfectedCell fuse(Virus virus) {
         virions.add(virus);
         return this;
@@ -37,10 +38,10 @@ public class InfectedCell extends Cell implements Timed, Info {
     }
 
     @Override
-    public TurnOver turn() {
+    public TurnCallBack turn() {
         lifeSpan--;
         if (lifeSpan <= 0) {
-            return TurnOver.EXPLODE;
+            return TurnCallBack.EXPLODE;
         } else {
             for (int i = virions.size() - 1; i >= 0; i--) {
                 Virus virus = virions.get(i);
@@ -49,6 +50,6 @@ public class InfectedCell extends Cell implements Timed, Info {
                 }
             }
         }
-        return TurnOver.NOTHING;
+        return TurnCallBack.NOTHING;
     }
 }

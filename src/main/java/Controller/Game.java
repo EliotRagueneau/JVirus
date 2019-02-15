@@ -1,14 +1,14 @@
 package Controller;
 
-import Content.Cell.Cell;
-import Content.Cell.ImmunizedCell.XCell;
-import Content.Cell.SensibleCell.YCell;
-import Content.Cell.SensibleCell.ZCell;
-import Content.Content;
-import Content.Enums.Direction;
-import Content.LocatedContent;
-import Content.Virus.Virus;
-import Content.Virus.VirusA;
+import Contents.Cells.Cell;
+import Contents.Cells.ImmunizedCells.XCell;
+import Contents.Cells.SensibleCells.YCell;
+import Contents.Cells.SensibleCells.ZCell;
+import Contents.Content;
+import Contents.Enums.Direction;
+import Contents.LocatedContent;
+import Contents.Virus.Virus;
+import Contents.Virus.VirusA;
 import Utils.IO;
 
 import java.util.ArrayList;
@@ -17,11 +17,13 @@ import java.util.Random;
 
 public class Game {
     private static Map map;
-    private static boolean vsPlayer = true;
+    private final int turnsByPLayer = 4;
+    private boolean vsPlayer = true;
 
-    public static void init() {
-        List<Content> toSpawn = new ArrayList<>();
+    public Game() {
         final int mapSize = 20;
+
+        List<Content> toSpawn = new ArrayList<>();
         toSpawn.addAll(new XCell().getNInstances((mapSize * mapSize) / 16));
         toSpawn.addAll(new YCell().getNInstances((mapSize * mapSize) / 16));
         toSpawn.addAll(new ZCell().getNInstances((mapSize * mapSize) / 16));
@@ -31,7 +33,11 @@ public class Game {
         menu();
     }
 
-    public static void menu() {
+    public static Map getMap() {
+        return map;
+    }
+
+    public void menu() {
         IO.print("Bienvenue dans JVirus !\n");
         IO.print("Vous voulez jouer contre :\n");
         IO.print("\t1. Un autre joueur\n");
@@ -41,18 +47,19 @@ public class Game {
         }
         Random random = new Random();
 
-        while (true) {
+        while (noVictory()) {
             map.show();
             if (vsPlayer) {
-                for (int i = 0; i < 1; i++) {
+                for (int i = 0; i < turnsByPLayer; i++) {
                     IO.print("Cellules, tour : " + (i + 1) + "\n");
-                    LocatedContent selectedLocatedContent = map.selectCase(Cell.class); //Appel de la méthode en spécifiant qu'on veut une classe Cell
-                    selectedLocatedContent.menu(); //Appel du menu
+                    //On indique à selectLocatedContent la classe à sélectionner
+                    LocatedContent selectedLocatedContent = map.selectLocatedContent(Cell.class);
+                    selectedLocatedContent.menu();
                     map.show();
                 }
             } else {
-                List<LocatedContent> cells = map.getCellCases();
-                for (int i = 0; i < 1; i++) {
+                List<LocatedContent> cells = map.getLocatedHealthyCells();
+                for (int i = 0; i < turnsByPLayer; i++) {
                     LocatedContent rdmLocatedContent = cells.remove(random.nextInt(cells.size()));
                     map.move(rdmLocatedContent, Direction.randomDirection(rdmLocatedContent));
                     try {
@@ -63,11 +70,10 @@ public class Game {
                     map.show();
                 }
             }
-
-            for (int i = 0; i < 1; i++) {
+            for (int i = 0; i < turnsByPLayer; i++) {
                 IO.print("Virus, tour : " + (i + 1) + "\n");
-                LocatedContent selectedLocatedContent = map.selectCase(Virus.class); //Selection uniquement des cellules
-                selectedLocatedContent.menu(); //Appel du menu de la cellule sélectionnée
+                LocatedContent selectedLocatedContent = map.selectLocatedContent(Virus.class);
+                selectedLocatedContent.menu();
                 map.show();
             }
             map.turn();
@@ -75,7 +81,15 @@ public class Game {
 
     }
 
-    public static Map getMap() {
-        return map;
+    private boolean noVictory() {
+        if (map.getNbVirus() < turnsByPLayer) {
+            IO.print("Félicitations aux cellules, elles ont gagné ... pour le moment ...");
+            System.exit(0);
+        }
+        if (map.getNbSensibleCells() == 0) {
+            IO.print("Félicitations aux virus, ils ont détruit leur hôte et vont mourir ...");
+            System.exit(0);
+        }
+        return true;
     }
 }

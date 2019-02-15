@@ -1,13 +1,17 @@
-package Content;
+package Contents;
 
-import Content.Cell.Cell;
-import Content.Cell.InfectedCell;
-import Content.Enums.Direction;
-import Content.Virus.Virus;
+import Contents.Cells.Cell;
+import Contents.Cells.InfectedCell;
+import Contents.Enums.Direction;
+import Contents.Interfaces.Info;
+import Contents.Virus.Virus;
 import Controller.Game;
 import Controller.Map;
 import Utils.IO;
 
+/**
+ * Simple class that allows the map to communicates to others classes the positions of its contents
+ */
 public class LocatedContent {
     public final int x;
     public final int y;
@@ -28,17 +32,17 @@ public class LocatedContent {
         if (content instanceof InfectedCell) {
             IO.print("1 : Apoptose\n");
         } else {
-            if (y != 0) {
-                IO.print("8 : Vous déplacer vers le haut\n");
-            }
-            if (y != Game.getMap().MAP_SIZE - 1) {
-                IO.print("2 : Vous déplacer vers le bas\n");
-            }
             if (x != 0) {
                 IO.print("4 : Vous déplacer vers la gauche\n");
             }
             if (x != Game.getMap().MAP_SIZE - 1) {
                 IO.print("6 : Vous déplacer vers la droite\n");
+            }
+            if (y != 0) {
+                IO.print("8 : Vous déplacer vers le haut\n");
+            }
+            if (y != Game.getMap().MAP_SIZE - 1) {
+                IO.print("2 : Vous déplacer vers le bas\n");
             }
         }
         IO.print("0 : Je ne voulais pas sélectionner cet élément\n");
@@ -51,7 +55,7 @@ public class LocatedContent {
                     map.explode(this);
                     break;
                 case 0:
-                    map.selectCase(Cell.class).menu();
+                    map.selectLocatedContent(Cell.class).menu();
                     break;
                 default:
                     IO.print("Mauvaise entrée\n");
@@ -75,9 +79,9 @@ public class LocatedContent {
                 break;
             case 0:
                 if (content instanceof Cell) {
-                    map.selectCase(Cell.class).menu();
+                    map.selectLocatedContent(Cell.class).menu();
                 } else {
-                    map.selectCase(Virus.class).menu();
+                    map.selectLocatedContent(Virus.class).menu();
                 }
                 break;
             case 5:
