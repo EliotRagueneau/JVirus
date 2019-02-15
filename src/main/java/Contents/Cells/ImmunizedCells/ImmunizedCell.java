@@ -7,12 +7,18 @@ import Contents.Content;
 import Contents.Virus.Virus;
 
 public abstract class ImmunizedCell extends Cell {
-    protected int life = 2;
+    /**
+     * Number of virus and infected cells elimination before death
+     */
+    protected int life = 3;
 
     public ImmunizedCell() {
         super(999);
     }
 
+    /**
+     * @see Content
+     */
     @Override
     public Content fuse(Virus virus) {
         life--;
@@ -22,6 +28,9 @@ public abstract class ImmunizedCell extends Cell {
         return this;
     }
 
+    /**
+     * @see Content
+     */
     @Override
     public Content fuse(Cell cell) {
         if (cell instanceof InfectedCell) {

@@ -1,7 +1,10 @@
 package Contents.Enums;
 
+/**
+ * Reaction of the map after a content execute its turn method.
+ */
 public enum TurnCallBack {
-    EXPLODE,
     DIE,
+    EXPLODE,
     NOTHING
 }

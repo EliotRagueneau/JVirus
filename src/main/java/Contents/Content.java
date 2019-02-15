@@ -28,19 +28,6 @@ public class Content implements Cloneable {
     }
 
     /**
-     * @see Cloneable
-     */
-    @Override
-    public Object clone() {
-        try {
-            return super.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    /**
      * Generate n new instances of contents
      *
      * @param n Number of instances to generate
@@ -67,8 +54,6 @@ public class Content implements Cloneable {
     }
 
     /**
-     * Methods that MUST be overwritten by children classes
-     *
      * @param target Cell to fuse with
      * @return Content born by the fusion of the instance with the target
      */
@@ -102,4 +87,16 @@ public class Content implements Cloneable {
         return null;
     }
 
+    /**
+     * @see Cloneable
+     */
+    @Override
+    public Object clone() {
+        try {
+            return super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

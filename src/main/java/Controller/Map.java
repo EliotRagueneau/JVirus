@@ -14,7 +14,6 @@ import Utils.IO;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-import java.util.Vector;
 
 /**
  * Two dimensional container of contents that ensure their representation for the user
@@ -220,7 +219,7 @@ public class Map implements Timed {
      */
     public void explode(LocatedContent c) {
         map[c.y][c.x] = new Content();
-        Vector<Virus> toSpread = ((InfectedCell) c.content).getVirions();
+        List<Virus> toSpread = ((InfectedCell) c.content).getVirions();
         for (Virus virion : toSpread) {
             randomPlacing(c.x, c.y, virion);
         }

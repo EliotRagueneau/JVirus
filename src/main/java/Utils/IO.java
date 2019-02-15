@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 
+/**
+ * Methods to interact with users
+ */
 public class IO {
     public static void print(String message) {
         System.out.print(message);
@@ -47,7 +50,7 @@ public class IO {
         }
     }
 
-    public final static void clearConsole() {
+    public static void clearConsole() {
         try {
             final String os = System.getProperty("os.name");
 

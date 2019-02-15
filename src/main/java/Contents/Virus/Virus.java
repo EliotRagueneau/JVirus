@@ -26,11 +26,6 @@ public class Virus extends Content implements Timed, Cloneable, Info {
      */
     protected int life;
 
-    @Override
-    public void info() {
-        IO.print(String.format("Ce virus va mourir dans %d tours !\n", lifeSpan));
-    }
-
     public Virus(int lifeSpan, int virulence, int infectionTime) {
         super();
         symbol = '+';
@@ -48,16 +43,30 @@ public class Virus extends Content implements Timed, Cloneable, Info {
         return infectionTime;
     }
 
+    /**
+     * @see Content
+     */
     @Override
     public Content fuse(Cell cell) {
         return cell.fuse(this);
     }
 
+    /**
+     * @see Content
+     */
     @Override
     public Virus fuse(Virus virus) {
         return new Virus((this.lifeSpan + virus.lifeSpan) / 2,
                 (this.virulence + virus.virulence) / 2,
                 (this.infectionTime + virus.infectionTime) / 2);
+    }
+
+    /**
+     * @see Info
+     */
+    @Override
+    public void info() {
+        IO.print(String.format("Ce virus va mourir dans %d tours !\n", lifeSpan));
     }
 
     /**

@@ -6,6 +6,9 @@ import Contents.Virus.Virus;
 
 import java.lang.reflect.InvocationTargetException;
 
+/**
+ * Cells than can be infected
+ */
 public abstract class SensibleCell extends Cell {
     public SensibleCell(int immunityLevel) {
         super(immunityLevel);

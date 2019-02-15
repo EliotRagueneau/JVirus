@@ -1,42 +1,65 @@
 package Contents.Cells;
 
+import Contents.Content;
 import Contents.Enums.TurnCallBack;
 import Contents.Interfaces.Info;
 import Contents.Interfaces.Timed;
 import Contents.Virus.Virus;
 import Utils.IO;
 
-import java.util.Vector;
+import java.util.LinkedList;
+import java.util.List;
 
+/**
+ * Result of the fusing of a sensible cell and a virus, will explode after some amount of time determined by
+ * the infecting virus infectionTime property and the immunity level of the founding cell.
+ * When exploding, the viruses contained in virions
+ */
 public class InfectedCell extends Cell implements Timed, Info {
 
-    private final Vector<Virus> virions = new Vector<>();
+    /**
+     * Viruses that grows inside the infected cell
+     */
+    private final List<Virus> virions;
 
+    /**
+     * Amount of time before death and explosion
+     */
     private int lifeSpan;
-
-    @Override
-    public void info() {
-        IO.print(String.format("Cette cellule infectée possède %d virus en elle.\n", virions.size()));
-        IO.print(String.format("Elle exploseras dans %d tours.\n", lifeSpan));
-    }
 
     public InfectedCell(int immunityLevel, Virus pathogen) {
         super(immunityLevel);
         symbol = 'ʘ';
+        virions = new LinkedList<>();
         virions.add(pathogen);
         lifeSpan = pathogen.getInfectionTime() + immunityLevel;
     }
 
+    public List<Virus> getVirions() {
+        return virions;
+    }
+
+    /**
+     * @see Content
+     */
     @Override
     public InfectedCell fuse(Virus virus) {
         virions.add(virus);
         return this;
     }
 
-    public Vector<Virus> getVirions() {
-        return virions;
+    /**
+     * @see Info
+     */
+    @Override
+    public void info() {
+        IO.print(String.format("Cette cellule infectée possède %d virus en elle.\n", virions.size()));
+        IO.print(String.format("Elle exploseras dans %d tours.\n", lifeSpan));
     }
 
+    /**
+     * @see TurnCallBack
+     */
     @Override
     public TurnCallBack turn() {
         lifeSpan--;

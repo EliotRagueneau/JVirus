@@ -11,6 +11,10 @@ import Utils.IO;
 
 /**
  * Simple class that allows the map to communicates to others classes the positions of its contents
+ * Also implements the menu of its content that will be shown to users after they selected it.
+ * (We decided to implement the menu here because we need positional data to ensure that we
+ * don't offer to users the opportunity to go outside the map, and because content don't have
+ * access to this positional data)
  */
 public class LocatedContent {
     public final int x;
