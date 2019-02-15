@@ -4,11 +4,11 @@ import Contents.Cells.Cell;
 import Contents.Cells.InfectedCell;
 import Contents.Cells.SensibleCells.SensibleCell;
 import Contents.Content;
-import Contents.Enums.Direction;
-import Contents.Enums.TurnCallBack;
-import Contents.Interfaces.Timed;
 import Contents.LocatedContent;
 import Contents.Virus.Virus;
+import Enums.Direction;
+import Enums.TurnCallBack;
+import Interfaces.Timed;
 import Utils.IO;
 
 import java.util.LinkedList;

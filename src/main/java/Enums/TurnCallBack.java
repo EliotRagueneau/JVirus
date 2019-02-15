@@ -1,4 +1,4 @@
-package Contents.Enums;
+package Enums;
 
 /**
  * Reaction of the map after a content execute its turn method.

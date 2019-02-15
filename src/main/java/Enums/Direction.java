@@ -1,4 +1,4 @@
-package Contents.Enums;
+package Enums;
 
 import Contents.LocatedContent;
 import Controller.Game;

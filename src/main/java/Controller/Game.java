@@ -5,10 +5,10 @@ import Contents.Cells.ImmunizedCells.XCell;
 import Contents.Cells.SensibleCells.YCell;
 import Contents.Cells.SensibleCells.ZCell;
 import Contents.Content;
-import Contents.Enums.Direction;
 import Contents.LocatedContent;
 import Contents.Virus.Virus;
 import Contents.Virus.VirusA;
+import Enums.Direction;
 import Utils.IO;
 
 import java.util.ArrayList;

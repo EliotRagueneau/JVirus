@@ -2,9 +2,9 @@ package Contents.Virus;
 
 import Contents.Cells.Cell;
 import Contents.Content;
-import Contents.Enums.TurnCallBack;
-import Contents.Interfaces.Info;
-import Contents.Interfaces.Timed;
+import Enums.TurnCallBack;
+import Interfaces.Info;
+import Interfaces.Timed;
 import Utils.IO;
 
 public class Virus extends Content implements Timed, Cloneable, Info {

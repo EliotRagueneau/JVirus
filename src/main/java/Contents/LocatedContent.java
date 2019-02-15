@@ -2,11 +2,11 @@ package Contents;
 
 import Contents.Cells.Cell;
 import Contents.Cells.InfectedCell;
-import Contents.Enums.Direction;
-import Contents.Interfaces.Info;
 import Contents.Virus.Virus;
 import Controller.Game;
 import Controller.Map;
+import Enums.Direction;
+import Interfaces.Info;
 import Utils.IO;
 
 /**

@@ -1,4 +1,4 @@
-package Contents.Interfaces;
+package Interfaces;
 
 public interface Info {
     /**

@@ -1,10 +1,10 @@
 package Contents.Cells;
 
 import Contents.Content;
-import Contents.Enums.TurnCallBack;
-import Contents.Interfaces.Info;
-import Contents.Interfaces.Timed;
 import Contents.Virus.Virus;
+import Enums.TurnCallBack;
+import Interfaces.Info;
+import Interfaces.Timed;
 import Utils.IO;
 
 import java.util.LinkedList;

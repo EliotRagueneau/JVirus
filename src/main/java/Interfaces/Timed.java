@@ -1,6 +1,6 @@
-package Contents.Interfaces;
+package Interfaces;
 
-import Contents.Enums.TurnCallBack;
+import Enums.TurnCallBack;
 
 public interface Timed {
     /**
