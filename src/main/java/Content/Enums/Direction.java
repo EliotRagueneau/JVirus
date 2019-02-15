@@ -1,6 +1,6 @@
 package Content.Enums;
 
-import Content.Case;
+import Content.LocatedContent;
 import Controller.Game;
 
 import java.util.LinkedList;
@@ -17,7 +17,7 @@ public enum Direction{
     private static final List<Direction> VALUES = List.of(values());
     private static final Random RANDOM = new Random();
 
-    public static Direction randomDirection(Case c) {
+    public static Direction randomDirection(LocatedContent c) {
         List<Direction> possibleValue = new LinkedList<>(VALUES);
         final int limit = Game.getMap().MAP_SIZE - 1;
         if (c.x == 0) {

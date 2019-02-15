@@ -8,12 +8,12 @@ import Controller.Game;
 import Controller.Map;
 import Utils.IO;
 
-public class Case {
+public class LocatedContent {
     public final int x;
     public final int y;
     public final Content content;
 
-    public Case(int x, int y, Content content) {
+    public LocatedContent(int x, int y, Content content) {
         this.x = x;
         this.y = y;
         this.content = content;
