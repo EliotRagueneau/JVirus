@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * Result of the fusing of a sensible cell and a virus, will explode after some amount of time determined by
- * the infecting virus infectionTime property and the immunity level of the founding cell.
+ * the infecting virus infectionTime property and the immunity level of the founding cell.<br>
  * When exploding, the viruses contained in virions
  */
 public class InfectedCell extends Cell implements Timed, Info {

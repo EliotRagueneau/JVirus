@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Object contained in the map
- * Directly generated : act as an empty  element of the map
+ * Object contained in the map.<br>
+ * Directly generated : act as an empty  element of the map<br>
  * Subclass generated : act as subclass
  */
 public class Content implements Cloneable {

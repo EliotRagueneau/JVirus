@@ -169,7 +169,7 @@ public class Map implements Timed {
     }
 
     /**
-     * Updates lists of contents that can be used, such as locatedHealthyCells.
+     * Updates lists of contents that can be used, such as locatedHealthyCells.<br>
      * Call the turn methods of map's contents and treat their callbacks
      *
      * @return Nothing
