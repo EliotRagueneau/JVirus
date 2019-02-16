@@ -1,4 +1,4 @@
-package Controller;
+package Controllers;
 
 import Contents.Cells.Cell;
 import Contents.Cells.InfectedCell;
@@ -89,7 +89,7 @@ public class Map implements Timed {
     public LocatedContent selectLocatedContent(Class<? extends Content> toChoose) {
         String input = IO.input("Quelle case voulez vous choisir ? (Ex : A 1)\n");
         int x, y;
-        if (input.matches(String.format("[a-%cA-%c][ \\-]?\\d{1,2}", 'a' + MAP_SIZE, 'A' + MAP_SIZE))) {
+        if (input.matches(String.format("[a-%cA-%c][ \\-]?\\d{1,2}", 'a' + MAP_SIZE - 1, 'A' + MAP_SIZE - 1))) {
             String[] arr = input.split("[ -]");
             char col = arr[0].toUpperCase().charAt(0);
             x = col - 'A';  // Convert a character to an int by its place on UTF8 table relative to the char 'A'
@@ -103,7 +103,7 @@ public class Map implements Timed {
                 }
             }
 
-        } else if (input.matches(String.format("\\d{1,2}[ \\-]?[a-%cA-%c]", 'a' + MAP_SIZE, 'A' + MAP_SIZE))) {
+        } else if (input.matches(String.format("\\d{1,2}[ \\-]?[a-%cA-%c]", 'a' + MAP_SIZE - 1, 'A' + MAP_SIZE - 1))) {
             char col = input.toUpperCase().charAt(input.length() - 1);
             x = col - 'A';  // Convert a character to an int by its place on UTF8 table relative to the char 'A'
             input = input.substring(0, input.length() - 1);
@@ -123,9 +123,9 @@ public class Map implements Timed {
         // Check if content is an instance of the desired class given as method parameter
         if (!toChoose.isInstance(content)) {
             if (toChoose == Cell.class) {
-                IO.print("Veuillez sélectionner une cellule.");
+                IO.print("Veuillez sélectionner une cellule.\n");
             } else {
-                IO.print("Veuillez sélectionner un virus.");
+                IO.print("Veuillez sélectionner un virus.\n");
             }
             return selectLocatedContent(toChoose);
         }
@@ -233,13 +233,18 @@ public class Map implements Timed {
      * @param virion Newly born virus that has to be placed
      */
     private void randomPlacing(int x, int y, Virus virion) {
-        if (map[y][x] instanceof Virus) {
-            x += (1 - RANDOM.nextInt(3));
-            y += (1 - RANDOM.nextInt(3));
-            randomPlacing(x, y, virion);
-        } else {
-            map[y][x] = virion.fuse(map[y][x]);
+        try {
+            if (map[y][x] instanceof Virus) {
+                x += (1 - RANDOM.nextInt(3));
+                y += (1 - RANDOM.nextInt(3));
+                randomPlacing(x, y, virion);
+            } else {
+                map[y][x] = virion.fuse(map[y][x]);
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            IO.print("Un virus est parti infecter un autre organisme\n");
         }
+
     }
 
     /**

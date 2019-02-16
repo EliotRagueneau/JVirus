@@ -1,7 +1,7 @@
 package Enums;
 
 import Contents.LocatedContent;
-import Controller.Game;
+import Controllers.Game;
 
 import java.util.LinkedList;
 import java.util.List;

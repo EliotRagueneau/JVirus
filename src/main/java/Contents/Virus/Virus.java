@@ -66,7 +66,7 @@ public class Virus extends Content implements Timed, Cloneable, Info {
      */
     @Override
     public void info() {
-        IO.print(String.format("Ce virus va mourir dans %d tours !\n", lifeSpan));
+        IO.print(String.format("Ce virus va mourir dans %d tours !\n", life));
     }
 
     /**

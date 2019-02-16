@@ -1,4 +1,4 @@
-package Controller;
+package Controllers;
 
 import Contents.Cells.Cell;
 import Contents.Cells.ImmunizedCells.XCell;
@@ -17,31 +17,28 @@ import java.util.Random;
 
 public class Game {
     private static Map map;
-    private final int turnsByPLayer = 4;
-    private boolean vsPlayer = true;
+    private int turnsByPLayer = 4;
+    private int mapSize = 20;
+    private float xProp = 0.2f;
+    private float yProp = 0.4f;
+    private float zProp = 0.4f;
+
 
     public Game() {
-        final int mapSize = 20;
-
+        menu();
         List<Content> toSpawn = new ArrayList<>();
-        toSpawn.addAll(new XCell().getNInstances((mapSize * mapSize) / 16));
-        toSpawn.addAll(new YCell().getNInstances((mapSize * mapSize) / 16));
-        toSpawn.addAll(new ZCell().getNInstances((mapSize * mapSize) / 16));
-        toSpawn.addAll(new VirusA().getNInstances((mapSize * mapSize) / 40));
+        int nbCell = (mapSize * mapSize) / 4;
+        toSpawn.addAll(new XCell().getNInstances(Math.round(nbCell * xProp)));
+        toSpawn.addAll(new YCell().getNInstances(Math.round(nbCell * yProp)));
+        toSpawn.addAll(new ZCell().getNInstances(Math.round(nbCell * zProp)));
+        toSpawn.addAll(new VirusA().getNInstances(nbCell / 10));
 
         map = new Map(mapSize, toSpawn);
-        menu();
-    }
 
-    public static Map getMap() {
-        return map;
-    }
-
-    public void menu() {
-        IO.print("Bienvenue dans JVirus !\n");
         IO.print("Vous voulez jouer contre :\n");
         IO.print("\t1. Un autre joueur\n");
         IO.print("\t2. L'ordinateur\n");
+        boolean vsPlayer = true;
         if (IO.intInput() == 2) {
             vsPlayer = false;
         }
@@ -78,7 +75,63 @@ public class Game {
             }
             map.turn();
         }
+    }
 
+    public static Map getMap() {
+        return map;
+    }
+
+    private void menu() {
+        IO.print("Bienvenue dans JVirus !\n");
+        IO.print("\t1. Jouer\n");
+        IO.print("\t2. Options\n");
+        if (IO.intInput() == 2) {
+            configure();
+        }
+    }
+
+    private void configure() {
+        while (true) {
+            IO.clearConsole();
+            IO.print("=====OPTIONS=====\n");
+            IO.print("\t1. Modifier la taille du plateau\n");
+            IO.print("\t2. Modifier la difficulté\n");
+            IO.print("\t3. Exit\n");
+            switch (IO.intInput()) {
+                case 1:
+                    mapSize = IO.intInput("Quelle taille de plateau désirez vous (Entre 1 et 26 de préférence)?\n");
+                    turnsByPLayer = mapSize * mapSize / 80;
+                    break;
+                case 2:
+                    IO.print("Quelle difficulté désirez vous ?\n");
+                    IO.print("\t1. Facile\n");
+                    IO.print("\t2. Normale\n");
+                    IO.print("\t3. Difficile\n");
+                    switch (IO.intInput()) {
+                        case 1:
+                            xProp = 0.1f;
+                            yProp = 0.7f;
+                            zProp = 0.2f;
+                            break;
+                        case 2:
+                            xProp = 0.2f;
+                            yProp = 0.4f;
+                            zProp = 0.4f;
+                            break;
+                        case 3:
+                            xProp = 0.4f;
+                            yProp = 0.2f;
+                            zProp = 0.4f;
+                            break;
+                        default:
+                            IO.print("Vous n'avez pas changé la difficulté.");
+                    }
+                    break;
+                case 3:
+                    return;
+            }
+
+        }
     }
 
     private boolean noVictory() {

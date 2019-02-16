@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"Contents"},{"l":"Contents.Cells"},{"l":"Contents.Cells.ImmunizedCells"},{"l":"Contents.Cells.SensibleCells"},{"l":"Contents.Virus"},{"l":"Controller"},{"l":"Enums"},{"l":"Interfaces"},{"l":"Utils"}]
+packageSearchIndex = [{"l":"Contents"},{"l":"Contents.Cells"},{"l":"Contents.Cells.ImmunizedCells"},{"l":"Contents.Cells.SensibleCells"},{"l":"Contents.Virus"},{"l":"Controllers"},{"l":"Enums"},{"l":"Interfaces"},{"l":"Utils"}]

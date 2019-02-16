@@ -4,7 +4,7 @@ Contents.Cells
 Contents.Cells.ImmunizedCells
 Contents.Cells.SensibleCells
 Contents.Virus
-Controller
+Controllers
 Enums
 Interfaces
 Utils
