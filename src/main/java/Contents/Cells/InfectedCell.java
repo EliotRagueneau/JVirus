@@ -7,6 +7,7 @@ import Interfaces.Info;
 import Interfaces.Timed;
 import Utils.IO;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class InfectedCell extends Cell implements Timed, Info {
     public InfectedCell(int immunityLevel, Virus pathogen) {
         super(immunityLevel);
         symbol = 'ʘ';
-        virions = new LinkedList<>();
+        virions = new ArrayList<>();
         virions.add(pathogen);
         lifeSpan = pathogen.getInfectionTime() + immunityLevel;
     }
