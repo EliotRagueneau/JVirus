@@ -21,7 +21,7 @@ public class IO {
         try {
             return new BufferedReader(new InputStreamReader(System.in)).readLine();
         } catch (IOException e) {
-            print("Erreur");
+            print("Erreur\n");
             return "";
         }
     }
@@ -34,8 +34,8 @@ public class IO {
     public static int intInput() {
         try {
             return Integer.parseInt(input());
-        } catch (Error e) {
-            print("Ceci n'est pas un entier, veuillez entrez un entier");
+        } catch (Exception e) {
+            print("Ceci n'est pas un entier, veuillez entrez un entier\n");
             return intInput();
         }
 
@@ -45,7 +45,7 @@ public class IO {
         try {
             return Integer.parseInt(input(message));
         } catch (Exception e) {
-            print("Ceci n'est pas un entier, veuillez entrez un entier");
+            print("Ceci n'est pas un entier, veuillez entrez un entier\n");
             return intInput(message);
         }
     }

@@ -29,7 +29,7 @@ public class InfectedCell extends Cell implements Timed, Info {
     private int lifeSpan;
 
     public InfectedCell(int immunityLevel, Virus pathogen) {
-        super(immunityLevel);
+        super(-1);
         symbol = 'ʘ';
         virions = new ArrayList<>();
         virions.add(pathogen);
