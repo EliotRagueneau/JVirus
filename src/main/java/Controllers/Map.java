@@ -89,7 +89,9 @@ public class Map implements Timed {
     public LocatedContent selectLocatedContent(Class<? extends Content> toChoose) {
         String input = IO.input("Quelle case voulez vous choisir ? (Ex : A 1)\n");
         int x, y;
-        if (input.matches(String.format("[a-%cA-%c][ \\-]?\\d{1,2}", 'a' + MAP_SIZE - 1, 'A' + MAP_SIZE - 1))) {
+        if (input.matches(String.format(
+                "[a-%cA-%c][ \\-]?\\d{1,2}",
+                'a' + MAP_SIZE - 1, 'A' + MAP_SIZE - 1))) {
             String[] arr = input.split("[ -]");
             char col = arr[0].toUpperCase().charAt(0);
             x = col - 'A';  // Convert a character to an int by its place on UTF8 table relative to the char 'A'
@@ -103,7 +105,9 @@ public class Map implements Timed {
                 }
             }
 
-        } else if (input.matches(String.format("\\d{1,2}[ \\-]?[a-%cA-%c]", 'a' + MAP_SIZE - 1, 'A' + MAP_SIZE - 1))) {
+        } else if (input.matches(String.format(
+                "\\d{1,2}[ \\-]?[a-%cA-%c]",
+                'a' + MAP_SIZE - 1, 'A' + MAP_SIZE - 1))) {
             char col = input.toUpperCase().charAt(input.length() - 1);
             x = col - 'A';  // Convert a character to an int by its place on UTF8 table relative to the char 'A'
             input = input.substring(0, input.length() - 1);
