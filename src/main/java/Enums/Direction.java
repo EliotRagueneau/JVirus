@@ -3,6 +3,7 @@ package Enums;
 import Contents.LocatedContent;
 import Controllers.Game;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -14,7 +15,7 @@ public enum Direction{
     LEFT,
     RIGHT;
 
-    private static final List<Direction> VALUES = List.of(values());
+    private static final List<Direction> VALUES = Arrays.asList(values());
     private static final Random RANDOM = new Random();
 
     public static Direction randomDirection(LocatedContent c) {
